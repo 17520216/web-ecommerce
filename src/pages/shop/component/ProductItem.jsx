@@ -1,15 +1,17 @@
 import { addCart } from "../../../redux/action/cart";
 import { useDispatch } from "react-redux";
+import { numberWithCommas } from "../../../utils/format";
 
 export default function ProductItem(props) {
   const dispatch = useDispatch();
-
   const { name, images, real_price } = props;
   let image1 = images?.[0]?.medium_url;
 
   let image2 = images?.[0]?.medium_url;
+  let tiki = "/img/products/product-7.jpg";
+
   function handleAddCart() {
-    dispatch(addCart(props));
+    dispatch(addCart({ ...props }));
   }
 
   return (
@@ -27,20 +29,32 @@ export default function ProductItem(props) {
             {image1 && (
               <img
                 className="card-img-top card-img-back"
-                src={image1}
+                src={
+                  image1 === "https://salt.tikicdn.com/assets/img/image.svg"
+                    ? tiki
+                    : image1
+                }
                 alt="..."
               />
             )}
             {image2 ? (
               <img
                 className="card-img-top card-img-front"
-                src={image2}
+                src={
+                  image2 === "https://salt.tikicdn.com/assets/img/image.svg"
+                    ? tiki
+                    : image2
+                }
                 alt="..."
               />
             ) : (
               <img
                 className="card-img-top card-img-back"
-                src={image1}
+                src={
+                  image1 === "https://salt.tikicdn.com/assets/img/image.svg"
+                    ? tiki
+                    : image1
+                }
                 alt="..."
               />
             )}
@@ -90,7 +104,9 @@ export default function ProductItem(props) {
             </a>
           </div>
           {/* Price */}
-          <div className="font-weight-bold text-muted">${real_price}</div>
+          <div className="font-weight-bold text-muted">
+            {numberWithCommas(real_price)} VND
+          </div>
         </div>
       </div>
     </div>

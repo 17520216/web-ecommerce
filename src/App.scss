@@ -7,3 +7,47 @@
 .error {
   border: 1px #ff6f61 solid;
 }
+.add {
+  max-width: 100px;
+  display: flex;
+  input {
+    width: 100% !important;
+    border: none;
+    text-align: center;
+  }
+  button {
+    flex-shrink: 0;
+    background-color: #f9f9f9;
+    border: solid 1px #cccccc;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+    outline: none;
+  }
+}
+.custom-btn {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: green;
+    transform: scaleX(0);
+    transition-duration: 0.3s;
+    transform-origin: center left;
+
+    transition: 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
+  &:hover {
+    &::after {
+      transform: scaleX(1);
+      transition: 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+      transform-origin: center right;
+    }
+  }
+}
+.error {
+  border: 1px solid #ff6f61;
+}

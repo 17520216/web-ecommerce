@@ -1,12 +1,9 @@
 import TabTitle from "./components/TabTitle";
-import Orders from "./components/Orders";
-import WishList from "./components/WishList";
-import PersonInfo from "./components/PersonInfo";
-import Payment from "./components/Payment";
-import Address from "./components/Address";
 import TabContent from "./components/TabContent";
 
 export default function Account({ children }) {
+  console.log("children", children);
+
   return (
     <section className="pt-7 pb-12">
       <div className="container">
@@ -20,7 +17,9 @@ export default function Account({ children }) {
           <TabTitle />
           <div className="col-12 col-md-9 col-lg-8 offset-lg-1">
             <div className="row">
-              <TabContent children={children} />
+              <div className="tab-content" style={{ width: "100%" }}>
+                {children}
+              </div>
             </div>
           </div>
         </div>

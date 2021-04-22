@@ -11,3 +11,5 @@ export const GET_PRODUCT = "GET_PRODUCT";
 export const FETCH_PRODUCT = "FETCH_PRODUCT";
 export const GET_CART = "GET_CART";
 export const REMOVE_CART = "REMOVE_CART";
+export const INCREASE_CART = "INCREASE_CART";
+export const DECREASE_CART = "DECREASE_CART";

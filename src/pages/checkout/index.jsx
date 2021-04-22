@@ -1,4 +1,85 @@
+import OrderCart from "./OrderCart";
+import Payment from "./Payment";
+import Title from "./Title";
+import { useSelector } from "react-redux";
+import useFormValidate from "../../core/ReactHook/useFormValidate";
+import Below from "./Below";
+
 export default function CheckOut() {
+  const { listCart, num } = useSelector((state) => state.cart);
+  const { form, inputChange, error, setForm, onSubmit } = useFormValidate(
+    {
+      firstName: "",
+      lastName: "",
+      email: "",
+      companyName: "",
+      shipping: "",
+      shipping_different: false,
+      zip: "",
+      city: "",
+      country: "",
+    },
+    {
+      rule: {
+        firstName: {
+          required: true,
+          pattern: "name",
+        },
+        lastName: {
+          required: true,
+          pattern: "name",
+        },
+        email: {
+          required: true,
+          pattern: "email",
+        },
+        companyName: {
+          required: true,
+          pattern: "name",
+        },
+        zip: {
+          required: true,
+        },
+        city: {
+          required: true,
+        },
+        country: {
+          required: true,
+        },
+      },
+      message: {
+        firstName: {
+          required: "Please fill your FirstName",
+        },
+        lastName: {
+          required: "Please fill your LastName",
+        },
+        companyName: {
+          required: "Please fill your CompanyName",
+        },
+        email: {
+          required: "Please fill your email",
+        },
+      },
+    }
+  );
+  function handleSubmit(e) {
+    e.preventDefault();
+    let exclude = {};
+    console.log("ship", form.shipping_different);
+    if (!form.shipping_different) {
+      exclude = {
+        country: 1,
+        city: 1,
+        zip: 1,
+      };
+    }
+    console.log(exclude);
+    let err = onSubmit({ exclude });
+    console.log("err", err);
+    console.log("form", form);
+  }
+
   return (
     <>
       <nav className="py-5">
@@ -26,19 +107,7 @@ export default function CheckOut() {
       {/* CONTENT */}
       <section className="pt-7 pb-12">
         <div className="container">
-          <div className="row">
-            <div className="col-12 text-center">
-              {/* Heading */}
-              <h3 className="mb-4">Checkout</h3>
-              {/* Subheading */}
-              <p className="mb-10">
-                Already have an account?{" "}
-                <a className="font-weight-bold text-reset" href="#!">
-                  Click here to login
-                </a>
-              </p>
-            </div>
-          </div>
+          <Title />
           <div className="row">
             <div className="col-12 col-md-7">
               {/* Form */}
@@ -54,12 +123,19 @@ export default function CheckOut() {
                         First Name *
                       </label>
                       <input
-                        className="form-control form-control-sm"
-                        id="checkoutBillingFirstName"
-                        type="text"
+                        name="firstName"
+                        className={`form-control form-control-sm ${
+                          error?.firstName ? "error" : ""
+                        }`}
                         placeholder="First Name"
                         required
+                        value={form.firstName}
+                        onChange={inputChange}
+                        type="text"
                       />
+                      <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                        {error?.firstName}
+                      </p>
                     </div>
                   </div>
                   <div className="col-12 col-md-6">
@@ -69,12 +145,19 @@ export default function CheckOut() {
                         Last Name *
                       </label>
                       <input
-                        className="form-control form-control-sm"
-                        id="checkoutBillingLastName"
+                        name="lastName"
                         type="text"
+                        className={`form-control form-control-sm ${
+                          error?.lastName ? "error" : ""
+                        }`}
                         placeholder="Last Name"
                         required
+                        value={form.lastName}
+                        onChange={inputChange}
                       />
+                      <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                        {error?.lastName}
+                      </p>
                     </div>
                   </div>
                   <div className="col-12">
@@ -82,12 +165,20 @@ export default function CheckOut() {
                     <div className="form-group">
                       <label htmlFor="checkoutBillingEmail">Email *</label>
                       <input
-                        className="form-control form-control-sm"
+                        className={`form-control form-control-sm ${
+                          error?.email ? "error" : ""
+                        }`}
                         id="checkoutBillingEmail"
-                        type="email"
+                        type="text"
                         placeholder="Email"
                         required
+                        value={form.email}
+                        name="email"
+                        onChange={inputChange}
                       />
+                      <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                        {error?.email}
+                      </p>
                     </div>
                   </div>
                   <div className="col-12">
@@ -97,11 +188,19 @@ export default function CheckOut() {
                         Company name *
                       </label>
                       <input
-                        className="form-control form-control-sm"
+                        className={`form-control form-control-sm ${
+                          error?.companyName ? "error" : ""
+                        }`}
                         id="checkoutBillingCompany"
                         type="text"
+                        name="companyName"
+                        value={form.companyName}
+                        onChange={inputChange}
                         placeholder="Company name (optional)"
                       />
+                      <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                        {error?.companyName}
+                      </p>
                     </div>
                   </div>
                   <div className="col-12">
@@ -109,12 +208,19 @@ export default function CheckOut() {
                     <div className="form-group">
                       <label htmlFor="checkoutBillingCountry">Country *</label>
                       <input
-                        className="form-control form-control-sm"
+                        className={`form-control form-control-sm ${
+                          error?.country ? "error" : ""
+                        }`}
                         id="checkoutBillingCountry"
                         type="text"
                         placeholder="Country"
-                        required
+                        value={form.country}
+                        onChange={inputChange}
+                        name="country"
                       />
+                      <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                        {error?.country}
+                      </p>
                     </div>
                   </div>
                   <div className="col-12">
@@ -151,12 +257,19 @@ export default function CheckOut() {
                     <div className="form-group">
                       <label htmlFor="checkoutBillingTown">Town / City *</label>
                       <input
-                        className="form-control form-control-sm"
+                        className={`form-control form-control-sm ${
+                          error?.city ? "error" : ""
+                        }`}
                         id="checkoutBillingTown"
                         type="text"
                         placeholder="Town / City"
-                        required
+                        value={form.city}
+                        onChange={inputChange}
+                        name="city"
                       />
+                      <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                        {error?.city}
+                      </p>
                     </div>
                   </div>
                   <div className="col-12 col-md-6">
@@ -166,12 +279,18 @@ export default function CheckOut() {
                         ZIP / Postcode *
                       </label>
                       <input
-                        className="form-control form-control-sm"
+                        className={`form-control form-control-sm ${
+                          error?.zip ? "error" : ""
+                        }`}
                         id="checkoutBillingZIP"
                         type="text"
                         placeholder="ZIP / Postcode"
-                        required
+                        value={form?.zip}
+                        onChange={inputChange}
                       />
+                      <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                        {error?.zip}
+                      </p>
                     </div>
                   </div>
                   <div className="col-12">
@@ -204,6 +323,9 @@ export default function CheckOut() {
                               id="checkoutShippingStandard"
                               name="shipping"
                               type="radio"
+                              value={8}
+                              checked={form.shipping == 8}
+                              onChange={inputChange}
                             />
                             <label
                               className="custom-control-label text-body text-nowrap"
@@ -224,6 +346,9 @@ export default function CheckOut() {
                               id="checkoutShippingExpress"
                               name="shipping"
                               type="radio"
+                              value={12}
+                              checked={form.shipping == 12}
+                              onChange={inputChange}
                             />
                             <label
                               className="custom-control-label text-body text-nowrap"
@@ -244,6 +369,9 @@ export default function CheckOut() {
                               id="checkoutShippingShort"
                               name="shipping"
                               type="radio"
+                              value={18}
+                              checked={form.shipping == 18}
+                              onChange={inputChange}
                             />
                             <label
                               className="custom-control-label text-body text-nowrap"
@@ -264,6 +392,9 @@ export default function CheckOut() {
                               id="checkoutShippingFree"
                               name="shipping"
                               type="radio"
+                              value={0}
+                              checked={form.shipping == 0}
+                              onChange={inputChange}
                             />
                             <label
                               className="custom-control-label text-body text-nowrap"
@@ -290,6 +421,9 @@ export default function CheckOut() {
                       className="custom-control-input"
                       id="checkoutShippingAddress"
                       type="checkbox"
+                      name="shipping_different"
+                      onChange={inputChange}
+                      value={form.shipping_different}
                     />
                     <label
                       className="custom-control-label font-size-sm"
@@ -553,174 +687,34 @@ export default function CheckOut() {
             </div>
             <div className="col-12 col-md-5 col-lg-4 offset-lg-1">
               {/* Heading */}
-              <h6 className="mb-7">Order Items (3)</h6>
+              <h6 className="mb-7">Order Items ({num})</h6>
               {/* Divider */}
               <hr className="my-7" />
               {/* List group */}
               <ul className="list-group list-group-lg list-group-flush-y list-group-flush-x mb-7">
-                <li className="list-group-item">
-                  <div className="row align-items-center">
-                    <div className="col-4">
-                      {/* Image */}
-                      <a href="product.html">
-                        <img
-                          src="/img/products/product-6.jpg"
-                          alt="..."
-                          className="img-fluid"
-                        />
-                      </a>
-                    </div>
-                    <div className="col">
-                      {/* Title */}
-                      <p className="mb-4 font-size-sm font-weight-bold">
-                        <a className="text-body" href="product.html">
-                          Cotton floral print Dress
-                        </a>{" "}
-                        <br />
-                        <span className="text-muted">$40.00</span>
-                      </p>
-                      {/* Text */}
-                      <div className="font-size-sm text-muted">
-                        Size: M <br />
-                        Color: Red
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <div className="row align-items-center">
-                    <div className="col-4">
-                      {/* Image */}
-                      <a href="product.html">
-                        <img
-                          src="/img/products/product-10.jpg"
-                          alt="..."
-                          className="img-fluid"
-                        />
-                      </a>
-                    </div>
-                    <div className="col">
-                      {/* Title */}
-                      <p className="mb-4 font-size-sm font-weight-bold">
-                        <a className="text-body" href="product.html">
-                          Suede cross body Bag
-                        </a>{" "}
-                        <br />
-                        <span className="text-muted">$49.00</span>
-                      </p>
-                      {/* Text */}
-                      <div className="font-size-sm text-muted">
-                        Color: Brown
-                      </div>
-                    </div>
-                  </div>
-                </li>
+                {listCart.map((e) => (
+                  <OrderCart key={e._id} {...e} />
+                ))}
               </ul>
               {/* Card */}
-              <div className="card mb-9 bg-light">
-                <div className="card-body">
-                  <ul className="list-group list-group-sm list-group-flush-y list-group-flush-x">
-                    <li className="list-group-item d-flex">
-                      <span>Subtotal</span>{" "}
-                      <span className="ml-auto font-size-sm">$89.00</span>
-                    </li>
-                    <li className="list-group-item d-flex">
-                      <span>Tax</span>{" "}
-                      <span className="ml-auto font-size-sm">$00.00</span>
-                    </li>
-                    <li className="list-group-item d-flex">
-                      <span>Shipping</span>{" "}
-                      <span className="ml-auto font-size-sm">$8.00</span>
-                    </li>
-                    <li className="list-group-item d-flex font-size-lg font-weight-bold">
-                      <span>Total</span> <span className="ml-auto">$97.00</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              {/* Disclaimer */}
+              <Payment />
+              <div className="col-12 col-md-5 col-lg-4 offset-lg-1"></div>{" "}
               <p className="mb-7 font-size-xs text-gray-500">
                 Your personal data will be used to process your order, support
                 your experience throughout this website, and for other purposes
                 described in our privacy policy.
               </p>
               {/* Button */}
-              <button className="btn btn-block btn-dark">Place Order</button>
+              <button onClick={handleSubmit} className="btn btn-block btn-dark">
+                Place Order
+              </button>
+              {/* Disclaimer */}
             </div>
           </div>
         </div>
       </section>
       {/* FEATURES */}
-      <section className="bg-light py-9">
-        <div className="container">
-          <div className="row">
-            <div className="col-12 col-md-6 col-lg-3">
-              {/* Item */}
-              <div className="d-flex mb-6 mb-lg-0">
-                {/* Icon */}
-                <i className="fe fe-truck font-size-lg text-primary" />
-                {/* Body */}
-                <div className="ml-6">
-                  {/* Heading */}
-                  <h6 className="heading-xxs mb-1">Free shipping</h6>
-                  {/* Text */}
-                  <p className="mb-0 font-size-sm text-muted">
-                    From all orders over $100
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-12 col-md-6 col-lg-3">
-              {/* Item */}
-              <div className="d-flex mb-6 mb-lg-0">
-                {/* Icon */}
-                <i className="fe fe-repeat font-size-lg text-primary" />
-                {/* Body */}
-                <div className="ml-6">
-                  {/* Heading */}
-                  <h6 className="mb-1 heading-xxs">Free returns</h6>
-                  {/* Text */}
-                  <p className="mb-0 font-size-sm text-muted">
-                    Return money within 30 days
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-12 col-md-6 col-lg-3">
-              {/* Item */}
-              <div className="d-flex mb-6 mb-md-0">
-                {/* Icon */}
-                <i className="fe fe-lock font-size-lg text-primary" />
-                {/* Body */}
-                <div className="ml-6">
-                  {/* Heading */}
-                  <h6 className="mb-1 heading-xxs">Secure shopping</h6>
-                  {/* Text */}
-                  <p className="mb-0 font-size-sm text-muted">
-                    You're in safe hands
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-12 col-md-6 col-lg-3">
-              {/* Item */}
-              <div className="d-flex">
-                {/* Icon */}
-                <i className="fe fe-tag font-size-lg text-primary" />
-                {/* Body */}
-                <div className="ml-6">
-                  {/* Heading */}
-                  <h6 className="mb-1 heading-xxs">Over 10,000 Styles</h6>
-                  {/* Text */}
-                  <p className="mb-0 font-size-sm text-muted">
-                    We have everything you need
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Below />
     </>
   );
 }

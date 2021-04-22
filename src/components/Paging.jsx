@@ -10,6 +10,7 @@ export default function Paging({ currentPage, totalPage }) {
       start = end - 5;
       if (start < 1) start = 1;
     }
+
     let listPage = [];
 
     for (let i = start; i <= end; i++) {

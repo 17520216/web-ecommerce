@@ -22,7 +22,7 @@ export default function renderRouter(routers, parentPath = "") {
         path = path.replace(/\/+/g, "/");
         let children = null;
         if (childRouters) {
-          children = renderRouter(childRouters);
+          children = renderRouter(childRouters, path);
         }
         if (auth) {
           return (

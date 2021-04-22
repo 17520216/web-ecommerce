@@ -12,6 +12,7 @@ import OrderDetail from "./OrderDetail";
 export default function TabContent({ children }) {
   const { url } = useRouteMatch();
 
+  console.log("children", children);
   return (
     <div className="tab-content" style={{ width: "100%" }}>
       <Switch>

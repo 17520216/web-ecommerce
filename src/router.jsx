@@ -19,6 +19,10 @@ import AddressDetail from "./pages/account/components/AddressDetail";
 import PaymentMethod from "./pages/account/components/PaymentMethod";
 import OrderDetail from "./pages/account/components/OrderDetail";
 import Shop from "./pages/shop";
+import ShippingCart from "./pages/shipping-cart";
+
+import { CartItem } from "./components/ModalCart";
+import WishList from "./pages/account/components/WishList";
 
 const routers = [
   {
@@ -43,6 +47,10 @@ const routers = [
         component: Store,
       },
       {
+        path: "/ship",
+        component: ShippingCart,
+      },
+      {
         path: "/auth",
         component: Auth,
       },
@@ -51,13 +59,17 @@ const routers = [
         component: Blog,
       },
       {
-        path: "/account",
+        path: "/account/",
         component: Account,
         auth: true,
         routers: [
           {
             path: "address",
             component: Address,
+          },
+          {
+            path: "wishlist",
+            component: WishList,
           },
           {
             path: "/address-detail",

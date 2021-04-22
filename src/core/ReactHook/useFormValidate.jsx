@@ -17,14 +17,16 @@ export default function useFormValidate(initialValue, validate) {
 
   const [form, setForm] = useState(value);
   const [error, setError] = useState();
+
   const inputChange = (e) => {
     let key = e.target.name;
-    if (e.target.name === "urlFace") {
-      key = "fb";
+    let value = e.target.value;
+    if (e.target.type === "checkbox") {
+      value = e.target.checked;
     }
     setForm({
       ...form,
-      [key]: e.target.value,
+      [key]: value,
     });
   };
   useEffect(() => {
@@ -35,11 +37,20 @@ export default function useFormValidate(initialValue, validate) {
       localStorage.removeItem(option.localStorage);
     };
   }, [form]);
-  const onSubmit = () => {
+  const onSubmit = (option = { exclude: {} }) => {
+    const { exclude } = option;
+    if (typeof exclude === "undefined") exclude = {};
+    console.log(exclude);
     const { rule, message } = validate;
     const err = {};
+
     for (let i in rule) {
       let r = rule[i];
+      console.log(i);
+      console.log(exclude);
+      if (i in exclude) {
+        console.log("tao");
+      }
       if (r.required) {
         if (!form[i] || /^\s+$/.test(form[i])) {
           err[i] = message?.[i]?.required || "Please fill something";
