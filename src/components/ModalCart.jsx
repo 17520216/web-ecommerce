@@ -39,9 +39,9 @@ export default function ModalCart() {
               <div class="modal-body flex-grow-0 my-auto">
                 <h6 class="mb-7 text-center">Your cart is empty 😞</h6>
 
-                <a class="btn btn-block btn-outline-dark" href="#!">
+                <Link class="btn btn-block btn-outline-dark" to="/shop">
                   Continue Shopping
-                </a>
+                </Link>
               </div>
             ) : (
               listCart.map((e) => <CartItem key={e._id} {...e} />)

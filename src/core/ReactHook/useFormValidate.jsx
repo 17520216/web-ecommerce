@@ -40,17 +40,12 @@ export default function useFormValidate(initialValue, validate) {
   const onSubmit = (option = { exclude: {} }) => {
     const { exclude } = option;
     if (typeof exclude === "undefined") exclude = {};
-    console.log(exclude);
     const { rule, message } = validate;
     const err = {};
 
     for (let i in rule) {
       let r = rule[i];
-      console.log(i);
-      console.log(exclude);
-      if (i in exclude) {
-        console.log("tao");
-      }
+      if (i in exclude) continue;
       if (r.required) {
         if (!form[i] || /^\s+$/.test(form[i])) {
           err[i] = message?.[i]?.required || "Please fill something";

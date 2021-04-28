@@ -18,12 +18,28 @@ export default function CheckOut() {
       zip: "",
       city: "",
       country: "",
+      payment: "card",
+      zip_different: "",
+      city_different: "",
+      country_different: "",
+      num_card: "",
+      name_card: "",
+      cvv_card: "",
     },
     {
       rule: {
         firstName: {
           required: true,
           pattern: "name",
+        },
+        num_card: {
+          required: true,
+        },
+        name_card: {
+          required: true,
+        },
+        cvv_card: {
+          required: true,
         },
         lastName: {
           required: true,
@@ -46,6 +62,15 @@ export default function CheckOut() {
         country: {
           required: true,
         },
+        zip_different: {
+          required: true,
+        },
+        city_different: {
+          required: true,
+        },
+        country_different: {
+          required: true,
+        },
       },
       message: {
         firstName: {
@@ -64,20 +89,29 @@ export default function CheckOut() {
     }
   );
   function handleSubmit(e) {
+    console.log("form.payment", form.payment);
     e.preventDefault();
     let exclude = {};
     console.log("ship", form.shipping_different);
     if (!form.shipping_different) {
       exclude = {
-        country: 1,
-        city: 1,
-        zip: 1,
+        zip_different: 1,
+        city_different: 1,
+        country_different: 1,
       };
     }
-    console.log(exclude);
+    if (form.payment !== "credit") {
+      exclude = {
+        ...exclude,
+        num_card: 1,
+        name_card: 1,
+        cvv_card: 1,
+      };
+    }
     let err = onSubmit({ exclude });
-    console.log("err", err);
-    console.log("form", form);
+    if (Object.keys(err).length === 0) {
+      alert("Success");
+    }
   }
 
   return (
@@ -285,8 +319,9 @@ export default function CheckOut() {
                         id="checkoutBillingZIP"
                         type="text"
                         placeholder="ZIP / Postcode"
-                        value={form?.zip}
+                        value={form.zip}
                         onChange={inputChange}
+                        name="zip"
                       />
                       <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
                         {error?.zip}
@@ -447,11 +482,19 @@ export default function CheckOut() {
                             Country *
                           </label>
                           <input
-                            className="form-control form-control-sm"
+                            className={`form-control form-control-sm ${
+                              error?.country_different ? "error" : ""
+                            }`}
                             id="checkoutShippingAddressCountry"
                             type="text"
                             placeholder="Country"
+                            value={form.country_different}
+                            onChange={inputChange}
+                            name="country_different"
                           />
+                          <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                            {error?.country_different}
+                          </p>
                         </div>
                       </div>
                       <div className="col-12">
@@ -489,11 +532,19 @@ export default function CheckOut() {
                             Town / City *
                           </label>
                           <input
-                            className="form-control form-control-sm"
+                            className={`form-control form-control-sm ${
+                              error?.city_different ? "error" : ""
+                            }`}
                             id="checkoutShippingAddressTown"
                             type="text"
                             placeholder="Town / City"
+                            value={form.city_different}
+                            onChange={inputChange}
+                            name="city_different"
                           />
+                          <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                            {error?.city_different}
+                          </p>
                         </div>
                       </div>
                       <div className="col-6">
@@ -503,11 +554,19 @@ export default function CheckOut() {
                             ZIP / Postcode *
                           </label>
                           <input
-                            className="form-control form-control-sm"
+                            className={`form-control form-control-sm ${
+                              error?.zip_different ? "error" : ""
+                            }`}
                             id="checkoutShippingAddressZIP"
                             type="text"
                             placeholder="ZIP / Postcode"
+                            value={form.zip_different}
+                            onChange={inputChange}
+                            name="zip_different"
                           />
+                          <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                            {error?.zip_different}
+                          </p>
                         </div>
                       </div>
                       <div className="col-12">
@@ -538,6 +597,9 @@ export default function CheckOut() {
                         data-toggle="collapse"
                         data-action="show"
                         data-target="#checkoutPaymentCardCollapse"
+                        value="credit"
+                        onChange={inputChange}
+                        checked={form.payment == "credit"}
                       />
                       {/* Label */}
                       <label
@@ -568,12 +630,19 @@ export default function CheckOut() {
                             Card Number
                           </label>
                           <input
-                            className="form-control form-control-sm"
+                            className={`form-control form-control-sm ${
+                              error?.num_card ? "error" : ""
+                            }`}
                             id="checkoutPaymentCardNumber"
                             type="text"
                             placeholder="Card Number *"
-                            required
+                            name="num_card"
+                            value={form.num_card}
+                            onChange={inputChange}
                           />
+                          <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                            {error?.num_card}
+                          </p>
                         </div>
                       </div>
                       <div className="col-12">
@@ -585,12 +654,19 @@ export default function CheckOut() {
                             Name on Card
                           </label>
                           <input
-                            className="form-control form-control-sm"
+                            className={`form-control form-control-sm ${
+                              error?.name_card ? "error" : ""
+                            }`}
                             id="checkoutPaymentCardName"
                             type="text"
                             placeholder="Name on Card *"
-                            required
+                            name="name_card"
+                            value={form.name_card}
+                            onChange={inputChange}
                           />
+                          <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                            {error?.name_card}
+                          </p>
                         </div>
                       </div>
                       <div className="col-12 col-md-4">
@@ -632,12 +708,16 @@ export default function CheckOut() {
                       <div className="col-12 col-md-4">
                         <div className="input-group input-group-merge">
                           <input
-                            className="form-control form-control-sm"
+                            className={`form-control form-control-sm ${
+                              error?.cvv_card ? "error" : ""
+                            }`}
                             id="checkoutPaymentCardCVV"
                             type="text"
                             placeholder="CVV *"
-                            required
-                          />
+                            name="cvv_card"
+                            value={form.cvv_card}
+                            onChange={inputChange}
+                          />{" "}
                           <div className="input-group-append">
                             <span
                               className="input-group-text"
@@ -649,6 +729,9 @@ export default function CheckOut() {
                               <i className="fe fe-help-circle" />
                             </span>
                           </div>
+                          <p style={{ color: "#ff6f61", fontStyle: "italic" }}>
+                            {error?.cvv_card}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -665,6 +748,9 @@ export default function CheckOut() {
                         data-toggle="collapse"
                         data-action="hide"
                         data-target="#checkoutPaymentCardCollapse"
+                        value="card"
+                        onChange={inputChange}
+                        checked={form.payment == "card"}
                       />
                       {/* Label */}
                       <label
