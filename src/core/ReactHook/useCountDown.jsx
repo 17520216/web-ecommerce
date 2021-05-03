@@ -4,13 +4,13 @@ export default function useCountDown(timeCountDown) {
   let [time, setTime] = useState(timeCountDown);
 
   useEffect(() => {
-    let timeinterval = setTimeout(() => {
+    let timeInterval = setTimeout(() => {
       if (!time) {
         return;
       }
       setTime(--time);
     }, 1000);
-    return () => clearInterval(timeinterval);
+    return () => clearInterval(timeInterval);
   }, [time]);
 
   let day = parseInt(time / 60 / 60 / 24);

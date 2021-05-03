@@ -664,7 +664,7 @@ export default function Header() {
         <div className="container">
           {/* Brand */}
           <a className="navbar-brand" href="./overview.html">
-            CFD* SHOP
+            CFD*SHOP
           </a>
           {/* Toggler */}
           <button
