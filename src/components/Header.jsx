@@ -628,9 +628,9 @@ export default function Header() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="./contact-us.html">
+                <Link className="nav-link" to="/contact">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
             {/* Nav */}

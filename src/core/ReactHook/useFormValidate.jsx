@@ -73,7 +73,6 @@ export default function useFormValidate(initialValue, validate) {
           pattern = patternPassWord;
         }
         if (!pattern.test(form[i])) {
-          console.log(message[i]?.pattern);
           err[i] =
             message?.[i]?.pattern || "Please fill match the format requested";
         }

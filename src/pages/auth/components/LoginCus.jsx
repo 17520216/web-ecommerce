@@ -38,7 +38,7 @@ export default function LoginCus() {
       checkPass: false,
     }
   );
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     let err = onSubmit();
     if (Object.keys(err).length === 0) {
