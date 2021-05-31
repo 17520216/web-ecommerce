@@ -2,9 +2,9 @@ import {
   LOGIN_ERROR,
   MAKE_LOGIN,
   SET_LOADING,
-  HANDLE_LOGOUT,
   MAKE_LOGOUT,
-  AUTH_FETCH_LOGIN,
+  REGISTER_ERROR,
+  REGISTER,
 } from "../type";
 
 let initialValue = {
@@ -13,6 +13,9 @@ let initialValue = {
   login: JSON.parse(localStorage.getItem("localLogin")) || false,
   loginErr: "",
   loading: false,
+  registerErr: "",
+  openModal: false,
+  registerSuccess: "",
 };
 
 export default function user(state = initialValue, action) {
@@ -35,6 +38,8 @@ export default function user(state = initialValue, action) {
         login: true,
         loading: false,
         loginErr: "",
+        registerSuccess: "",
+        registerErr: "",
       };
     case MAKE_LOGOUT:
       localStorage.clear();
@@ -42,9 +47,20 @@ export default function user(state = initialValue, action) {
         ...state,
         login: false,
       };
-    case AUTH_FETCH_LOGIN:
-      console.log("reducer");
-      return state;
+    case REGISTER_ERROR:
+      return {
+        ...state,
+        registerErr: action.payload,
+        registerSuccess: "",
+      };
+    case REGISTER:
+      return {
+        ...state,
+        registerErr: "",
+        // dataUser: action.payload,
+        registerSuccess:
+          "Congratulations register successful!!! Please login again!",
+      };
     default:
       return state;
   }

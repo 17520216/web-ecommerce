@@ -1,15 +1,16 @@
 import useFormValidate from "../../../core/ReactHook/useFormValidate";
 import { useDispatch } from "react-redux";
-import { fetchLogin, loginError } from "../../../redux/action/user";
+import { fetchLogin } from "../../../redux/action/user";
 import { useSelector } from "react-redux";
 
-export default function LoginCus() {
+export default function LoginCus({ email, confirmPassword }) {
   const dispatch = useDispatch();
   const { loginErr } = useSelector((state) => state.user);
+  console.log("email", email);
   const { form, setForm, onSubmit, inputChange, error } = useFormValidate(
     {
-      username: "",
-      password: "",
+      username: email || "",
+      password: confirmPassword || "",
       checked: false,
     },
     {

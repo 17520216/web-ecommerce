@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+const productApi = {
   product: (page) => {
     return fetch(`https://cfd-reactjs.herokuapp.com/product?page=${page}`, {
       method: "GET",
@@ -9,3 +8,4 @@ export default {
     }).then((res) => res.json());
   },
 };
+export default productApi;

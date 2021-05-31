@@ -4,8 +4,8 @@ import product from "./product";
 import cart from "./cart";
 
 let reducers = combineReducers({
-  user: user,
-  product: product,
-  cart: cart,
+  user,
+  product,
+  cart,
 });
 export default reducers;

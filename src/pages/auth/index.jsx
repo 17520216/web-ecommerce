@@ -4,13 +4,16 @@ import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 export default function Auth() {
-  const { login } = useSelector((state) => state.user);
+  const { login, dataUser } = useSelector((state) => state.user);
   if (login) return <Redirect to="/account/person" />;
   return (
     <section className="py-12">
       <div className="container">
         <div className="row">
-          <LoginCus />
+          <LoginCus
+            email={dataUser?.email}
+            password={dataUser?.confirmPassword}
+          />
           <NewCus />
         </div>
       </div>

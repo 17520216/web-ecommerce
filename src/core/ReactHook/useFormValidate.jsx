@@ -52,32 +52,39 @@ export default function useFormValidate(initialValue, validate) {
           continue;
         }
       }
-      if (r.min && form[i].length < r.min)
-        if (r.pattern && form[i]) {
-          let pattern = r.pattern;
-          if (pattern === "email" || pattern === "username") {
-            pattern = patternEmail;
-          }
-          if (pattern === "phone") {
-            pattern = patternPhone;
-          }
-          if (pattern === "name") {
-            pattern = patternName;
-          }
-          if (pattern === "urlFace") {
-            pattern = patternFbUrl;
-          }
-          if (pattern === "urlWeb") {
-            pattern = patternWebUrl;
-          }
-          if (pattern === "password") {
-            pattern = patternPassWord;
-          }
-          if (!pattern.test(form[i])) {
-            err[i] =
-              message?.[i]?.pattern || "Please fill match the format requested";
-          }
+      if (r.min && form[i].length < r.min) {
+        err[i] = message?.[i]?.min || "Please fill more than 6 characters";
+      }
+      if (r.pattern && form[i]) {
+        let pattern = r.pattern;
+        if (pattern === "email" || pattern === "username") {
+          pattern = patternEmail;
         }
+        if (pattern === "phone") {
+          pattern = patternPhone;
+        }
+        if (pattern === "name") {
+          pattern = patternName;
+        }
+        if (pattern === "urlFace") {
+          pattern = patternFbUrl;
+        }
+        if (pattern === "urlWeb") {
+          pattern = patternWebUrl;
+        }
+        if (pattern === "password") {
+          pattern = patternPassWord;
+        }
+        if (!pattern.test(form[i])) {
+          err[i] =
+            message?.[i]?.pattern || "Please fill match the format requested";
+        }
+      }
+      if (r.match && form[r.match]) {
+        if (form[i] !== form[r.match]) {
+          err[i] = message?.[i]?.match || "Please make sure passwords match ";
+        }
+      }
     }
 
     if (Object.keys(err).length === 0) {

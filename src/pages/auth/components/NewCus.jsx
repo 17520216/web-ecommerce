@@ -1,11 +1,16 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import useFormValidate from "../../../core/ReactHook/useFormValidate";
-
+import { fetchRegister } from "../../../redux/action/user";
 export default function NewCus() {
+  let dispatch = useDispatch();
+  let { registerErr, registerSuccess } = useSelector((state) => state.user);
+
   const { error, inputChange, onSubmit, form } = useFormValidate(
     {
       firstName: "",
       lastName: "",
-      email: "",
+      username: "",
       password: "",
       confirmPassword: "",
     },
@@ -19,7 +24,7 @@ export default function NewCus() {
           pattern: "name",
           required: true,
         },
-        email: {
+        username: {
           required: true,
           pattern: "email",
         },
@@ -29,6 +34,7 @@ export default function NewCus() {
         },
         confirmPassword: {
           required: true,
+          match: "password",
         },
       },
     }
@@ -39,7 +45,7 @@ export default function NewCus() {
     let err = onSubmit();
     console.log(err);
     if (Object.keys(err).length === 0) {
-      console.log("form", form);
+      dispatch(fetchRegister(form));
     }
   }
   return (
@@ -51,6 +57,16 @@ export default function NewCus() {
           <h6 className="mb-7">New Customer</h6>
           {/* Form */}
           <form>
+            {registerErr && (
+              <p style={{ marginBottom: 15, color: "#e55d5d" }}>
+                {registerErr}
+              </p>
+            )}
+            {registerSuccess && (
+              <p style={{ marginBottom: 15, color: "green" }}>
+                {registerSuccess}
+              </p>
+            )}
             <div className="row">
               <div className="col-12">
                 {/* Email */}
@@ -107,13 +123,13 @@ export default function NewCus() {
                     id="registerEmail"
                     type="email"
                     placeholder="Email Address *"
-                    name="email"
-                    value={form.email}
+                    name="username"
+                    value={form.username}
                     onChange={inputChange}
                   />
-                  {error && (
+                  {error?.username && (
                     <p style={{ marginBottom: 15, color: "#e55d5d" }}>
-                      {error?.email}
+                      {error?.username}
                     </p>
                   )}
                 </div>

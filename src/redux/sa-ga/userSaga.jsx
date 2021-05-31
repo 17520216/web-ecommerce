@@ -1,5 +1,11 @@
 import { call, put } from "redux-saga/effects";
-import { loginError, login, logout } from "../action/user";
+import {
+  loginError,
+  login,
+  logout,
+  registerError,
+  register,
+} from "../action/user";
 import userApi from "../../api/userApi";
 import productApi from "../../api/productApi";
 import { getPro } from "../action/product";
@@ -18,4 +24,13 @@ export function* fetchProduct({ payload }) {
   let res = yield call(productApi.product, payload);
   localStorage.setItem("localProduct", JSON.stringify(res));
   yield put(getPro(res));
+}
+
+export function* fetchRegister({ payload }) {
+  let res = yield call(userApi.register, payload);
+  if (res.data) {
+    yield put(register(res.data));
+  } else if (res.error) {
+    yield put(registerError(res.error));
+  }
 }
