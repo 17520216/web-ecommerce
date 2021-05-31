@@ -61,16 +61,17 @@ export default function CartOrder(props) {
               </div>
             </div>
             {/* Remove */}
-            <a className="font-size-xs text-gray-400 ml-auto" href="#!">
-              <i
-                className="fe fe-x"
-                onClick={(e) => {
-                  e.preventDefault();
-                  dispatch(removeCart(props._id));
-                }}
-              />{" "}
+            <div
+              style={{ cursor: "pointer" }}
+              className="font-size-xs text-gray-400 ml-auto"
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(removeCart(props._id));
+              }}
+            >
+              <i className="fe fe-x" />
               Remove
-            </a>
+            </div>
           </div>
         </div>
       </div>

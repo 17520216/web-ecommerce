@@ -1,7 +1,30 @@
 import { useSelector } from "react-redux";
+import useFormValidate from "../../../core/ReactHook/useFormValidate";
 
 export default function PersonInfo() {
   const { dataUser } = useSelector((state) => state.user);
+  const { form, onSubmit, error, inputChange } = useFormValidate(
+    {
+      ...dataUser,
+    },
+    {
+      rule: {
+        first_name: {
+          required: true,
+        },
+        last_name: {
+          required: true,
+        },
+        password: {
+          required: true,
+        },
+        new_password: {
+          required: true,
+        },
+      },
+    }
+  );
+
   return (
     <form>
       <div className="row">
@@ -14,7 +37,7 @@ export default function PersonInfo() {
               id="accountFirstName"
               type="text"
               placeholder="First Name *"
-              defaultValue={dataUser.first_name}
+              defaultValue={form.first_name}
               required
             />
           </div>
@@ -28,7 +51,7 @@ export default function PersonInfo() {
               id="accountLastName"
               type="text"
               placeholder="Last Name *"
-              defaultValue={dataUser.last_name}
+              defaultValue={form.last_name}
               required
             />
           </div>
@@ -42,8 +65,7 @@ export default function PersonInfo() {
               id="accountEmail"
               type="email"
               placeholder="Email Address *"
-              defaultValue={dataUser.email}
-              required
+              defaultValue={form.email}
             />
           </div>
         </div>

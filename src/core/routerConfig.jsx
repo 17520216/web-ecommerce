@@ -42,7 +42,7 @@ export default function renderRouter(routers, parentPath = "") {
             exact={exact}
             path={path}
             component={(...prop) => <Component {...prop}>{children}</Component>}
-          ></Route>
+          />
         );
       })}
     </Switch>

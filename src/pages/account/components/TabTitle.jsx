@@ -5,6 +5,9 @@ import { useDispatch } from "react-redux";
 export default function TabTitle() {
   const { url } = useRouteMatch();
   const dispatch = useDispatch();
+  function test() {
+    console.log("run");
+  }
   return (
     <div className="col-12 col-md-3">
       {/* Nav */}
@@ -37,6 +40,7 @@ export default function TabTitle() {
           <NavLink
             className="list-group-item list-group-item-action dropright-toggle "
             to={`${url}/payment`}
+            onClick={test()}
           >
             Payment Methods
           </NavLink>

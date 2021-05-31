@@ -1,4 +1,47 @@
+import useFormValidate from "../../../core/ReactHook/useFormValidate";
+
 export default function NewCus() {
+  const { error, inputChange, onSubmit, form } = useFormValidate(
+    {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    {
+      rule: {
+        firstName: {
+          required: true,
+          pattern: "name",
+        },
+        lastName: {
+          pattern: "name",
+          required: true,
+        },
+        email: {
+          required: true,
+          pattern: "email",
+        },
+        password: {
+          required: true,
+          min: 6,
+        },
+        confirmPassword: {
+          required: true,
+        },
+      },
+    }
+  );
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    let err = onSubmit();
+    console.log(err);
+    if (Object.keys(err).length === 0) {
+      console.log("form", form);
+    }
+  }
   return (
     <div className="col-12 col-md-6">
       {/* Card */}
@@ -20,8 +63,15 @@ export default function NewCus() {
                     id="registerFirstName"
                     type="text"
                     placeholder="First Name *"
-                    required
+                    name="firstName"
+                    value={form.firstName}
+                    onChange={inputChange}
                   />
+                  {error && (
+                    <p style={{ marginBottom: 15, color: "#e55d5d" }}>
+                      {error?.firstName}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="col-12">
@@ -35,8 +85,15 @@ export default function NewCus() {
                     id="registerLastName"
                     type="text"
                     placeholder="Last Name *"
-                    required
+                    name="lastName"
+                    value={form.lastName}
+                    onChange={inputChange}
                   />
+                  {error && (
+                    <p style={{ marginBottom: 15, color: "#e55d5d" }}>
+                      {error?.lastName}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="col-12">
@@ -50,8 +107,15 @@ export default function NewCus() {
                     id="registerEmail"
                     type="email"
                     placeholder="Email Address *"
-                    required
+                    name="email"
+                    value={form.email}
+                    onChange={inputChange}
                   />
+                  {error && (
+                    <p style={{ marginBottom: 15, color: "#e55d5d" }}>
+                      {error?.email}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="col-12 col-md-6">
@@ -65,8 +129,15 @@ export default function NewCus() {
                     id="registerPassword"
                     type="password"
                     placeholder="Password *"
-                    required
+                    name="password"
+                    value={form.password}
+                    onChange={inputChange}
                   />
+                  {error && (
+                    <p style={{ marginBottom: 15, color: "#e55d5d" }}>
+                      {error?.password}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="col-12 col-md-6">
@@ -80,8 +151,15 @@ export default function NewCus() {
                     id="registerPasswordConfirm"
                     type="password"
                     placeholder="Confrm Password *"
-                    required
+                    name="confirmPassword"
+                    value={form.confirmPassword}
+                    onChange={inputChange}
                   />
+                  {error && (
+                    <p style={{ marginBottom: 15, color: "#e55d5d" }}>
+                      {error?.confirmPassword}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="col-12 col-md-auto">
@@ -111,7 +189,11 @@ export default function NewCus() {
               </div>
               <div className="col-12">
                 {/* Button */}
-                <button className="btn btn-sm btn-dark" type="submit">
+                <button
+                  onClick={handleSubmit}
+                  className="btn btn-sm btn-dark"
+                  type="submit"
+                >
                   Register
                 </button>
               </div>

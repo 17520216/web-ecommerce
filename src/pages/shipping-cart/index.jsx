@@ -1,10 +1,11 @@
 import CartOrder from "./CartOrder";
 import { useSelector } from "react-redux";
 import { numberWithCommas } from "../../utils/format";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 export default function ShippingCart() {
   const { listCart, amount } = useSelector((state) => state.cart);
 
+  if (amount === 0) return <Redirect to="/shop" />;
   return (
     <>
       <nav className="py-5">
@@ -111,12 +112,9 @@ export default function ShippingCart() {
                 Proceed to Checkout
               </Link>
               {/* Link */}
-              <a
-                className="btn btn-link btn-sm px-0 text-body"
-                href="shop.html"
-              >
+              <Link className="btn btn-link btn-sm px-0 text-body" to="/shop">
                 <i className="fe fe-arrow-left mr-2" /> Continue Shopping
-              </a>
+              </Link>
             </div>
           </div>
         </div>

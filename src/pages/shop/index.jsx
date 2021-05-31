@@ -17,9 +17,12 @@ export default function Shop() {
   const dispatch = useDispatch();
   const { product, paging } = useSelector((state) => state.product);
   const page = getPage();
+
   useEffect(() => {
     dispatch(fetchProduct(page || 1));
+    return window.localStorage.setItem("refresh", null);
   }, [page]);
+
   return (
     <>
       <section className="py-11">

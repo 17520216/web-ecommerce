@@ -114,6 +114,7 @@ const routers = [
         component: Products,
       },
       {
+        exact: true,
         path: "/",
         component: Home,
       },

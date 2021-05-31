@@ -26,7 +26,7 @@ function App({ children, reducers, appSaga }) {
 
   return (
     <Provider store={store}>
-      <Context.Provider>{children}</Context.Provider>;
+      <Context.Provider>{children}</Context.Provider>
     </Provider>
   );
 }

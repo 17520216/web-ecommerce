@@ -51,7 +51,7 @@ export default function FormContact() {
   return (
     <div className="col-12 col-md-8">
       {/* Form */}
-      {message && <p style={{ color: "rgb(255 111 97)" }}>{message}</p>}
+      {message && <p style={{ color: "green" }}>{message}</p>}
       <form>
         {/* Email */}
         <div className="form-group">

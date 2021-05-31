@@ -38,7 +38,7 @@ export default function useFormValidate(initialValue, validate) {
     };
   }, [form]);
   const onSubmit = (option = { exclude: {} }) => {
-    const { exclude } = option;
+    let { exclude } = option;
     if (typeof exclude === "undefined") exclude = {};
     const { rule, message } = validate;
     const err = {};
@@ -52,37 +52,35 @@ export default function useFormValidate(initialValue, validate) {
           continue;
         }
       }
-      if (r.pattern && form[i]) {
-        let pattern = r.pattern;
-        if (pattern === "email" || pattern === "username") {
-          pattern = patternEmail;
+      if (r.min && form[i].length < r.min)
+        if (r.pattern && form[i]) {
+          let pattern = r.pattern;
+          if (pattern === "email" || pattern === "username") {
+            pattern = patternEmail;
+          }
+          if (pattern === "phone") {
+            pattern = patternPhone;
+          }
+          if (pattern === "name") {
+            pattern = patternName;
+          }
+          if (pattern === "urlFace") {
+            pattern = patternFbUrl;
+          }
+          if (pattern === "urlWeb") {
+            pattern = patternWebUrl;
+          }
+          if (pattern === "password") {
+            pattern = patternPassWord;
+          }
+          if (!pattern.test(form[i])) {
+            err[i] =
+              message?.[i]?.pattern || "Please fill match the format requested";
+          }
         }
-        if (pattern === "phone") {
-          pattern = patternPhone;
-        }
-        if (pattern === "name") {
-          pattern = patternName;
-        }
-        if (pattern === "urlFace") {
-          pattern = patternFbUrl;
-        }
-        if (pattern === "urlWeb") {
-          pattern = patternWebUrl;
-        }
-        if (pattern === "password") {
-          pattern = patternPassWord;
-        }
-        if (!pattern.test(form[i])) {
-          err[i] =
-            message?.[i]?.pattern || "Please fill match the format requested";
-        }
-      }
     }
 
     if (Object.keys(err).length === 0) {
-      // console.log(form);
-      // setForm(initialValue);
-
       if (form?.checked) {
         sessionStorage.setItem("passWord", JSON.stringify(form));
       }
@@ -99,3 +97,11 @@ export default function useFormValidate(initialValue, validate) {
     error,
   };
 }
+
+// if (validate[i].match) {
+//   let mathVal = form[validate[i].match] || undefined
+//   if (mathVal !== form[i]) {
+//     errorObj[i] = message?.[i]?.match || "Vui lòng điền giống thông tin cần thiết";
+//     continue;
+//   }
+// }

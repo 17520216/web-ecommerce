@@ -2,8 +2,6 @@ import TabTitle from "./components/TabTitle";
 import TabContent from "./components/TabContent";
 
 export default function Account({ children }) {
-  console.log("children", children);
-
   return (
     <section className="pt-7 pb-12">
       <div className="container">

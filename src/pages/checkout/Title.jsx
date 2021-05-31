@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Title() {
   return (
     <div className="row">
@@ -7,9 +9,9 @@ export default function Title() {
         {/* Subheading */}
         <p className="mb-10">
           Already have an account?{" "}
-          <a className="font-weight-bold text-reset" href="#!">
+          <Link to="/auth" className="font-weight-bold text-reset">
             Click here to login
-          </a>
+          </Link>
         </p>
       </div>
     </div>

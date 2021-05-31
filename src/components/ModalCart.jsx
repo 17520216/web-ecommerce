@@ -6,8 +6,13 @@ import { useDispatch } from "react-redux";
 import { removeCart, increase, decrease } from "../redux/action/cart";
 import { numberWithCommas } from "../utils/format";
 
+let $ = window.$;
 export default function ModalCart() {
   const { listCart, num, amount } = useSelector((state) => state.cart);
+  function closeModalCart() {
+    document.getElementById("modalShoppingCart").classList.remove("show");
+    document.querySelector("body").classList.remove("modal-open");
+  }
 
   return ReactDOM.createPortal(
     <div
@@ -54,15 +59,26 @@ export default function ModalCart() {
           </div>
           {/* Buttons */}
           <div className="modal-body">
-            <Link className="btn btn-block btn-dark" to="/ship">
+            <Link className="btn btn-block btn-outline-dark" to="/checkout">
               Continue to Checkout
             </Link>
-            <a
-              className="btn btn-block btn-outline-dark"
-              href="./shopping-cart.html"
-            >
-              View Cart
-            </a>
+            {amount > 0 ? (
+              <Link
+                onClick={closeModalCart}
+                className="btn btn-block btn-outline-dark"
+                to="/ship"
+              >
+                View Cart
+              </Link>
+            ) : (
+              <Link
+                onClick={closeModalCart}
+                className="btn btn-block btn-outline-dark"
+                to="/shop"
+              >
+                View Cart
+              </Link>
+            )}
           </div>
         </div>
       </div>

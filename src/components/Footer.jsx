@@ -183,7 +183,7 @@ export default function Footer() {
             <div className="col">
               {/* Copyright */}
               <p className="mb-3 mb-md-0 font-size-xxs text-muted">
-                © 2019 All rights reserved. Designed by Unvab.
+                © 2021 All rights reserved. Designed by NguyenAn.
               </p>
             </div>
             <div className="col-auto custom">
