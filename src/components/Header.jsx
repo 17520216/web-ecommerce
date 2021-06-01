@@ -519,7 +519,7 @@ export default function Header() {
           {/* Promo */}
           <div className="mr-xl-8">
             <i className="fe fe-truck mr-2" />{" "}
-            <span className="heading-xxxs">Free shipping worldwide</span>
+            <span className="heading-xxxs">{t("Free shipping worldwide")}</span>
           </div>
           {/* Toggler */}
           <button
@@ -605,7 +605,11 @@ export default function Header() {
                   data-toggle="dropdown"
                   href="#"
                 >
-                  {lang === "en" ? "English" : "Tiếng Việt"}
+                  {lang === "en"
+                    ? "English"
+                    : lang === "china"
+                    ? "China"
+                    : "Tiếng Việt"}
                 </a>
                 {/* Menu */}
                 <div className="dropdown-menu minw-0">
@@ -623,6 +627,13 @@ export default function Header() {
                   >
                     Vietnamese
                   </a>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => changeLang("china")}
+                  >
+                    China
+                  </a>
                 </div>
               </li>
             </ul>
@@ -634,9 +645,9 @@ export default function Header() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="./faq.html">
-                  FAQ
-                </a>
+                <Link className="nav-link" to="faq">
+                  {t("FAQ")}
+                </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/contact">
@@ -804,6 +815,13 @@ export default function Header() {
                             >
                               Kids
                             </a>
+                            <Link
+                              className="nav-link text-uppercase"
+                              data-toggle="tab"
+                              to="/product"
+                            >
+                              Product
+                            </Link>
                           </nav>
                         </div>
                       </div>
