@@ -7,7 +7,7 @@ export default function MainLayout({ children }) {
   return (
     <>
       <Header />
-      {/* <Message /> */}
+      {/* <Message />s */}
       {children}
       <Footer />
       <ModalCart />

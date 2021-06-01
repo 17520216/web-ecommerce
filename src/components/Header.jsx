@@ -1,8 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useTranslate } from "../core/Translate";
 export default function Header() {
   const { login } = useSelector((state) => state.user);
   const { listCart } = useSelector((state) => state.cart);
+  let { lang, t, setLang } = useTranslate();
+
+  function changeLang(lang) {
+    setLang(lang);
+  }
 
   return (
     <>
@@ -599,18 +605,23 @@ export default function Header() {
                   data-toggle="dropdown"
                   href="#"
                 >
-                  English
+                  {lang === "en" ? "English" : "Tiếng Việt"}
                 </a>
                 {/* Menu */}
                 <div className="dropdown-menu minw-0">
-                  <a className="dropdown-item" href="#">
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => changeLang("en")}
+                  >
                     English
                   </a>
-                  <a className="dropdown-item" href="#">
-                    French
-                  </a>
-                  <a className="dropdown-item" href="#">
-                    German
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => changeLang("vi")}
+                  >
+                    Vietnamese
                   </a>
                 </div>
               </li>
@@ -619,7 +630,7 @@ export default function Header() {
             <ul className="nav navbar-nav mr-8">
               <li className="nav-item">
                 <a className="nav-link" href="./shipping-and-returns.html">
-                  Shipping
+                  {t("Shipping")}
                 </a>
               </li>
               <li className="nav-item">
@@ -629,7 +640,7 @@ export default function Header() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/contact">
-                  Contact
+                  {t("Contact")}
                 </Link>
               </li>
             </ul>
