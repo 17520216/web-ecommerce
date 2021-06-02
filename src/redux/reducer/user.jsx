@@ -5,6 +5,7 @@ import {
   MAKE_LOGOUT,
   REGISTER_ERROR,
   REGISTER,
+  UPDATE,
 } from "../type";
 
 let initialValue = {
@@ -16,6 +17,7 @@ let initialValue = {
   registerErr: "",
   openModal: false,
   registerSuccess: "",
+  updateSuccess: "",
 };
 
 export default function user(state = initialValue, action) {
@@ -60,6 +62,12 @@ export default function user(state = initialValue, action) {
         // dataUser: action.payload,
         registerSuccess:
           "Congratulations register successful!!! Please login again!",
+      };
+    case UPDATE:
+      console.log("action.payload", action.payload);
+      return {
+        ...state,
+        dataUser: action.payload,
       };
     default:
       return state;

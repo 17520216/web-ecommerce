@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 export default function LoginCus({ email, confirmPassword }) {
   const dispatch = useDispatch();
   const { loginErr } = useSelector((state) => state.user);
-  console.log("email", email);
   const { form, setForm, onSubmit, inputChange, error } = useFormValidate(
     {
       username: email || "",
@@ -58,12 +57,10 @@ export default function LoginCus({ email, confirmPassword }) {
           <form>
             <div className="row">
               <div className="col-12">
-                {loginErr ? (
+                {loginErr && (
                   <p style={{ marginBottom: 15, color: "#e55d5d" }}>
                     {loginErr}
                   </p>
-                ) : (
-                  <></>
                 )}
                 {/* Email */}
                 <div className="form-group">

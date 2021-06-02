@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import Review from "../../components/Review";
 
 export default function Products() {
@@ -1209,7 +1208,6 @@ export default function Products() {
                         style={{ marginBottom: "20px" }}
                         className="btn btn-outline-dark"
                         type="submit"
-                        onClick={handleClick}
                       >
                         Post Review
                       </button>

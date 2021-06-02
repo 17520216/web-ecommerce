@@ -1,31 +1,84 @@
-import { useSelector } from "react-redux";
+import ReactLoading from "react-loading";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUpdate } from "../../../redux/action/user";
+import Loading from "../../../components/Loading";
 import useFormValidate from "../../../core/ReactHook/useFormValidate";
 
 export default function PersonInfo() {
-  const { dataUser } = useSelector((state) => state.user);
+  const { dataUser, loading } = useSelector((state) => state.user);
+  let dispatch = useDispatch();
+  let yearNow = new Date().getFullYear();
+
+  let birthday = "";
+  if (dataUser.birthday === null) {
+    birthday = "1/1/2000";
+  } else {
+    birthday = dataUser.birthday;
+  }
+
+  let [day, month, year] = birthday.split("/");
+  let [date, setDate] = useState({
+    day: day,
+    month: month,
+    year: year,
+  });
   const { form, onSubmit, error, inputChange } = useFormValidate(
     {
-      ...dataUser,
+      name: dataUser.name,
+      last_name: dataUser.last_name,
+      email: dataUser.email,
+      password: "",
+      confirmPassword: "",
     },
     {
       rule: {
-        first_name: {
+        name: {
           required: true,
+          pattern: "name",
         },
         last_name: {
           required: true,
+          pattern: "name",
         },
         password: {
           required: true,
         },
-        new_password: {
+        confirmPassword: {
           required: true,
+          match: "password",
         },
       },
     }
   );
+  function handleSelect(e) {
+    let name = e.target.name;
+    setDate({
+      ...date,
+      [name]: e.target.value,
+    });
+  }
 
-  return (
+  function handleSubmit(e) {
+    e.preventDefault();
+    let send = date.day + "/" + date.month + "/" + date.year;
+    let exclude = {};
+    if (!form.password) {
+      exclude = {
+        password: true,
+        confirmPassword: true,
+      };
+    }
+    let err = onSubmit({ exclude });
+
+    if (Object.keys(err).length === 0) {
+      dispatch(fetchUpdate({ ...form, birthday: send }));
+    }
+  }
+
+  return loading ? (
+    <ReactLoading type="cylon" color="#00afab" height={30} width={55} />
+  ) : (
     <form>
       <div className="row">
         <div className="col-12 col-md-6">
@@ -33,13 +86,16 @@ export default function PersonInfo() {
           <div className="form-group">
             <label htmlFor="accountFirstName">First Name *</label>
             <input
-              className="form-control form-control-sm"
-              id="accountFirstName"
+              className={`form-control form-control-sm ${
+                error?.name ? "error" : ""
+              }`}
+              onChange={inputChange}
+              name="name"
               type="text"
               placeholder="First Name *"
-              defaultValue={form.first_name}
-              required
+              value={form.name}
             />
+            {error?.name && <p className="text-error">{error.name}</p>}
           </div>
         </div>
         <div className="col-12 col-md-6">
@@ -47,13 +103,18 @@ export default function PersonInfo() {
           <div className="form-group">
             <label htmlFor="accountLastName">Last Name *</label>
             <input
-              className="form-control form-control-sm"
-              id="accountLastName"
+              onChange={inputChange}
+              className={`form-control form-control-sm ${
+                error?.last_name ? "error" : ""
+              }`}
+              name="last_name"
               type="text"
               placeholder="Last Name *"
-              defaultValue={form.last_name}
-              required
+              value={form.last_name}
             />
+            {error?.last_name && (
+              <p className="text-error">{error.last_name}</p>
+            )}
           </div>
         </div>
         <div className="col-12">
@@ -61,12 +122,16 @@ export default function PersonInfo() {
           <div className="form-group">
             <label htmlFor="accountEmail">Email Address *</label>
             <input
-              className="form-control form-control-sm"
-              id="accountEmail"
-              type="email"
+              onChange={inputChange}
+              name="email"
+              className={`form-control form-control-sm ${
+                error?.email ? "error" : ""
+              }`}
+              type="text"
               placeholder="Email Address *"
-              defaultValue={form.email}
+              value={form.email}
             />
+            {error?.email && <p className="text-error">{error.email}</p>}
           </div>
         </div>
         <div className="col-12 col-md-6">
@@ -74,12 +139,16 @@ export default function PersonInfo() {
           <div className="form-group">
             <label htmlFor="accountPassword">Current Password *</label>
             <input
-              className="form-control form-control-sm"
-              id="accountPassword"
+              onChange={inputChange}
+              name="password"
               type="password"
+              className={`form-control form-control-sm ${
+                error?.password ? "error" : ""
+              }`}
               placeholder="Current Password *"
-              required
+              value={form.password}
             />
+            {error?.password && <p className="text-error">{error.password}</p>}
           </div>
         </div>
         <div className="col-12 col-md-6">
@@ -87,12 +156,18 @@ export default function PersonInfo() {
           <div className="form-group">
             <label htmlFor="AccountNewPassword">New Password *</label>
             <input
-              className="form-control form-control-sm"
-              id="AccountNewPassword"
+              onChange={inputChange}
+              name="confirmPassword"
               type="password"
+              className={`form-control form-control-sm ${
+                error?.confirmPassword ? "error" : ""
+              }`}
               placeholder="New Password *"
-              required
+              value={form.confirmPassword}
             />
+            {error?.confirmPassword && (
+              <p className="text-error">{error.confirmPassword}</p>
+            )}
           </div>
         </div>
         <div className="col-12 col-lg-6">
@@ -110,10 +185,15 @@ export default function PersonInfo() {
                 <select
                   className="custom-select custom-select-sm"
                   id="accountDate"
+                  onChange={handleSelect}
+                  name="day"
+                  value={date.day}
                 >
-                  <option>10</option>
-                  <option>11</option>
-                  <option selected>12</option>
+                  {[...Array(31)].map((e, i) => (
+                    <option onChange={inputChange} value={i + 1} key={i}>
+                      {i + 1}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="col">
@@ -124,10 +204,15 @@ export default function PersonInfo() {
                 <select
                   className="custom-select custom-select-sm"
                   id="accountMonth"
+                  name="month"
+                  onChange={handleSelect}
+                  value={date.month}
                 >
-                  <option>January</option>
-                  <option selected>February</option>
-                  <option>March</option>
+                  {[...Array(12)].map((e, i) => (
+                    <option onClick={inputChange} value={i + 1} key={i}>
+                      {i + 1}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="col-auto">
@@ -138,10 +223,15 @@ export default function PersonInfo() {
                 <select
                   className="custom-select custom-select-sm"
                   id="accountYear"
+                  name="year"
+                  onChange={handleSelect}
+                  value={date.year}
                 >
-                  <option>1990</option>
-                  <option selected>1991</option>
-                  <option>1992</option>
+                  {[...Array(100)].map((e, i) => (
+                    <option value={yearNow - i} key={i}>
+                      {yearNow - i}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -163,7 +253,7 @@ export default function PersonInfo() {
         </div>
         <div className="col-12">
           {/* Button */}
-          <button className="btn btn-dark" type="submit">
+          <button className="btn btn-dark" type="submit" onClick={handleSubmit}>
             Save Changes
           </button>
         </div>

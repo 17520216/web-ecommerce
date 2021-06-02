@@ -1,4 +1,4 @@
-import { NavLink, useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 export default function Order() {
   const { url } = useRouteMatch();
   return (
@@ -92,12 +92,12 @@ export default function Order() {
             <div className="form-row">
               <div className="col-6">
                 {/* Button */}
-                <NavLink
+                <Link
                   className="btn btn-sm btn-block btn-outline-dark"
-                  to={`${url}/orders-detail`}
+                  to={`${url}/detail`}
                 >
                   Order Details
-                </NavLink>
+                </Link>
               </div>
               <div className="col-6">
                 {/* Button */}

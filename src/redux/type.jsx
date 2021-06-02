@@ -16,3 +16,5 @@ export const DECREASE_CART = "DECREASE_CART";
 export const REGISTER = "REGISTER";
 export const REGISTER_ERROR = "REGISTER_ERROR";
 export const AUTH_FETCH_REGISTER = "AUTH_FETCH_REGISTER";
+export const FETCH_UPDATE = "FETCH_UPDATE";
+export const UPDATE = "UPDATE";

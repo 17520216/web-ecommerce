@@ -6,6 +6,8 @@ import {
   REGISTER,
   AUTH_FETCH_REGISTER,
   REGISTER_ERROR,
+  FETCH_UPDATE,
+  UPDATE,
 } from "../type";
 export function fetchLogin(form) {
   return {
@@ -47,6 +49,19 @@ export function register(data) {
 export function registerError(data) {
   return {
     type: REGISTER_ERROR,
+    payload: data,
+  };
+}
+
+export function fetchUpdate(data) {
+  return {
+    type: FETCH_UPDATE,
+    payload: data,
+  };
+}
+export function updateInfo(data) {
+  return {
+    type: UPDATE,
     payload: data,
   };
 }

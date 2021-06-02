@@ -1,5 +1,4 @@
 import TabTitle from "./components/TabTitle";
-import TabContent from "./components/TabContent";
 
 export default function Account({ children }) {
   return (

@@ -82,9 +82,10 @@ const routers = [
           {
             path: "orders",
             component: Orders,
+            exact: true,
           },
           {
-            path: "orders-detail",
+            path: "orders/detail",
             component: OrderDetail,
           },
           {

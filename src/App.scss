@@ -48,12 +48,7 @@
     }
   }
 }
-.error {
-  border: 1px solid #ff6f61;
-}
-// .active {
-//   background-color: #ddd;
-// }
+
 .message {
   position: absolute;
   top: 0;
@@ -75,4 +70,17 @@
     transition-duration: 0.4s;
     transform: translateX(0);
   }
+}
+
+.text-error {
+  font-style: italic;
+  color: #ff6f61;
+  margin-top: 10px;
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
