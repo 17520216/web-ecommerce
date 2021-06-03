@@ -19,3 +19,5 @@ export const AUTH_FETCH_REGISTER = "AUTH_FETCH_REGISTER";
 export const FETCH_UPDATE = "FETCH_UPDATE";
 export const UPDATE = "UPDATE";
 export const LOADING_PRO = "LOADING_PRO";
+export const GET_CATEGORY = "GET_CATEGORY";
+export const FETCH_CATEGORY = "FETCH_CATEGORY";

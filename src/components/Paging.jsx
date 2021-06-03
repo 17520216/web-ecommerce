@@ -1,4 +1,22 @@
 import { Link } from "react-router-dom";
+function convertQueryToObject() {
+  var search = window.location.search.substring(1);
+  return !search
+    ? {}
+    : JSON.parse(
+        '{"' +
+          decodeURI(search.replace(/&/g, '","').replace(/=/g, '":"')) +
+          '"}'
+      );
+}
+const reverse = function (obj) {
+  var str = [];
+  for (var p in obj)
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  return str.join("&");
+};
 
 export default function Paging({ currentPage, totalPage }) {
   function renderPaging() {
@@ -14,12 +32,15 @@ export default function Paging({ currentPage, totalPage }) {
     let listPage = [];
 
     for (let i = start; i <= end; i++) {
+      let queryUrl = convertQueryToObject();
+      queryUrl.page = i;
+      let strUrl = reverse(queryUrl);
       listPage.push(
         <li
           className={`page-item ${currentPage === i ? "active" : ""}`}
           key={i}
         >
-          <Link className="page-link" to={`/shop?page=${i}`}>
+          <Link className="page-link" to={`/shop?${strUrl}`}>
             {i}
           </Link>
         </li>
@@ -35,7 +56,10 @@ export default function Paging({ currentPage, totalPage }) {
           <li className="page-item">
             <Link
               className="page-link page-link-arrow"
-              to={`/shop?page=${currentPage - 1}`}
+              to={`/shop?${reverse({
+                ...convertQueryToObject(),
+                page: currentPage - 1,
+              })}`}
             >
               <i className="fa fa-caret-left" />
             </Link>
@@ -48,7 +72,10 @@ export default function Paging({ currentPage, totalPage }) {
           <li className="page-item">
             <Link
               className="page-link page-link-arrow"
-              to={`/shop?page=${currentPage + 1}`}
+              to={`/shop?${reverse({
+                ...convertQueryToObject(),
+                page: currentPage + 1,
+              })}`}
             >
               <i className="fa fa-caret-right" />
             </Link>

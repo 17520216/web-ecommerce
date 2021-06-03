@@ -1,12 +1,31 @@
 import SideBar from "./component/SideBar";
 import Slider from "./component/Silder";
-import Head from "./component/Head";
 import ProductItem from "./component/ProductItem";
 import { useEffect } from "react";
-import { fetchProduct, setLoading } from "../../redux/action/product";
+import { fetchProduct, fetchCategory } from "../../redux/action/product";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Paging from "../../components/Paging";
+
+import { useRouteMatch, useHistory } from "react-router";
+function convertQueryToObject() {
+  var search = window.location.search.substring(1);
+  return !search
+    ? {}
+    : JSON.parse(
+        '{"' +
+          decodeURI(search.replace(/&/g, '","').replace(/=/g, '":"')) +
+          '"}'
+      );
+}
+const reverse = function (obj) {
+  var str = [];
+  for (var p in obj)
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  return str.join("&");
+};
 
 function getPage() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -15,21 +34,82 @@ function getPage() {
 
 export default function Shop() {
   const dispatch = useDispatch();
-  const { product, paging } = useSelector((state) => state.product);
+  const { product, paging, catagories } = useSelector((state) => state.product);
   const page = getPage();
 
+  let queryUrl = convertQueryToObject();
+  let strUrl = reverse(queryUrl);
   useEffect(() => {
-    dispatch(fetchProduct(page || 1));
-  }, [page]);
+    dispatch(fetchProduct(strUrl));
+    dispatch(fetchCategory());
+  }, [strUrl]);
+
+  let history = useHistory();
+  let { path } = useRouteMatch();
+
+  function sortChange(e) {
+    let value = e.target.value;
+    let queryObj = convertQueryToObject();
+    queryObj.sort = value;
+    if (value === "") {
+      delete queryObj.sort;
+    }
+    let queryUrl = reverse(queryObj);
+    history.push(`${path}?${queryUrl}`);
+  }
+
   return (
     <>
       <section className="py-11">
         <div className="container">
           <div className="row">
-            <SideBar />
+            <SideBar catagories={catagories} />
             <div className="col-12 col-md-8 col-lg-9">
               <Slider />
-              <Head />
+              <div className="row align-items-center mb-7">
+                <div className="col-12 col-md">
+                  {/* Heading */}
+                  <h3 className="mb-1">Womens' Clothing</h3>
+                  {/* Breadcrumb */}
+                  <ol className="breadcrumb mb-md-0 font-size-xs text-gray-400">
+                    <li className="breadcrumb-item">
+                      <a className="text-gray-400" href="index.html">
+                        Home
+                      </a>
+                    </li>
+                    <li className="breadcrumb-item active">Women's Clothing</li>
+                  </ol>
+                </div>
+                <div className="col-12 col-md-auto">
+                  {/* Select */}
+                  <select
+                    onChange={sortChange}
+                    className="custom-select custom-select-xs"
+                  >
+                    <option selected={queryUrl.sort === ""} value="">
+                      ---Filter---
+                    </option>
+                    <option
+                      selected={queryUrl.sort === "real_price.-1"}
+                      value="real_price.-1"
+                    >
+                      High Price
+                    </option>
+                    <option
+                      selected={queryUrl.sort === "real_price.1"}
+                      value="real_price.1"
+                    >
+                      Low Price
+                    </option>
+                    <option
+                      selected={queryUrl.sort === "rating_average.-1"}
+                      value="rating_average.-1"
+                    >
+                      High Rating
+                    </option>
+                  </select>
+                </div>
+              </div>
               {/* Tags */}
               <div className="row mb-7">
                 <div className="col-12">

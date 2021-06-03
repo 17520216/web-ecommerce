@@ -1,8 +1,14 @@
-import { FETCH_PRODUCT, GET_PRODUCT, LOADING_PRO } from "../type";
-export function fetchProduct(page) {
+import {
+  FETCH_PRODUCT,
+  GET_PRODUCT,
+  LOADING_PRO,
+  GET_CATEGORY,
+  FETCH_CATEGORY,
+} from "../type";
+export function fetchProduct(strUrl) {
   return {
     type: FETCH_PRODUCT,
-    payload: page,
+    payload: strUrl,
   };
 }
 
@@ -10,6 +16,17 @@ export function getPro(res) {
   return {
     type: GET_PRODUCT,
     payload: res,
+  };
+}
+export function getCategory(res) {
+  return {
+    type: GET_CATEGORY,
+    payload: res,
+  };
+}
+export function fetchCategory(res) {
+  return {
+    type: FETCH_CATEGORY,
   };
 }
 

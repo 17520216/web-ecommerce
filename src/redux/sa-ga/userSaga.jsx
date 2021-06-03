@@ -8,7 +8,7 @@ import {
 } from "../action/user";
 import userApi from "../../api/userApi";
 import productApi from "../../api/productApi";
-import { getPro, actionLoading } from "../action/product";
+import { getPro, actionLoading, getCategory } from "../action/product";
 export function* fetchLogin({ payload }) {
   let res = yield call(userApi.login, payload);
   if (res.error) {
@@ -40,5 +40,12 @@ export function* fetchUpdate({ payload }) {
   if (res.data) {
     localStorage.setItem("dataUser", JSON.stringify(res.data));
     yield put(updateInfo(res.data));
+  }
+}
+export function* fetchCategory() {
+  let res = yield call(productApi.category);
+  if (res) {
+    localStorage.setItem("categories", JSON.stringify(res));
+    yield put(getCategory(res));
   }
 }
