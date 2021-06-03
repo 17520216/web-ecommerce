@@ -3,7 +3,7 @@ import Slider from "./component/Silder";
 import Head from "./component/Head";
 import ProductItem from "./component/ProductItem";
 import { useEffect } from "react";
-import { fetchProduct } from "../../redux/action/product";
+import { fetchProduct, setLoading } from "../../redux/action/product";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Paging from "../../components/Paging";
@@ -20,9 +20,7 @@ export default function Shop() {
 
   useEffect(() => {
     dispatch(fetchProduct(page || 1));
-    return window.localStorage.setItem("refresh", null);
   }, [page]);
-
   return (
     <>
       <section className="py-11">
@@ -87,8 +85,8 @@ export default function Shop() {
               </div>
               {/* Products */}
               <div className="row">
-                {product?.data?.map((e) => (
-                  <ProductItem key={e._id} {...e} />
+                {product?.data?.map((e, i) => (
+                  <ProductItem key={i} {...e} />
                 ))}
               </div>
               {/* Pagination */}

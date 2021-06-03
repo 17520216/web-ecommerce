@@ -19,11 +19,13 @@ export default function useFormValidate(initialValue, validate) {
   const [error, setError] = useState();
 
   const inputChange = (e) => {
+    e.preventDefault();
     let key = e.target.name;
     let value = e.target.value;
     if (e.target.type === "checkbox") {
       value = e.target.checked;
     }
+
     setForm({
       ...form,
       [key]: value,

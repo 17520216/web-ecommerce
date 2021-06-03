@@ -8,6 +8,7 @@ import {
   REGISTER_ERROR,
   FETCH_UPDATE,
   UPDATE,
+  SET_LOADING,
 } from "../type";
 export function fetchLogin(form) {
   return {
@@ -62,6 +63,13 @@ export function fetchUpdate(data) {
 export function updateInfo(data) {
   return {
     type: UPDATE,
+    payload: data,
+  };
+}
+
+export function setLoading(data) {
+  return {
+    type: SET_LOADING,
     payload: data,
   };
 }

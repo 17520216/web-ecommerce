@@ -1,6 +1,6 @@
 const productApi = {
   product: (page) => {
-    return fetch(`https://cfd-reactjs.herokuapp.com/product?page=${page}`, {
+    return fetch(`http://cfd-reactjs.herokuapp.com/product?page=${page}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -1,8 +1,10 @@
 import { addCart } from "../../../redux/action/cart";
-import { useDispatch } from "react-redux";
+import { Skeleton } from "@material-ui/lab";
+import { useDispatch, useSelector } from "react-redux";
 import { numberWithCommas } from "../../../utils/format";
 
 export default function ProductItem(props) {
+  let { loading } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   const { name, images, real_price } = props;
   let image1 = images?.[0]?.medium_url;
@@ -26,37 +28,44 @@ export default function ProductItem(props) {
         <div className="card-img">
           {/* Image */}
           <a className="card-img-hover" href="product.html">
-            {image1 && (
-              <img
-                className="card-img-top card-img-back"
-                src={
-                  image1 === "https://salt.tikicdn.com/assets/img/image.svg"
-                    ? tiki
-                    : image1
-                }
-                alt="..."
-              />
-            )}
-            {image2 ? (
-              <img
-                className="card-img-top card-img-front"
-                src={
-                  image2 === "https://salt.tikicdn.com/assets/img/image.svg"
-                    ? tiki
-                    : image2
-                }
-                alt="..."
-              />
+            {loading === true ? (
+              <Skeleton variant="rect" width="100%" height={252} />
             ) : (
-              <img
-                className="card-img-top card-img-back"
-                src={
-                  image1 === "https://salt.tikicdn.com/assets/img/image.svg"
-                    ? tiki
-                    : image1
-                }
-                alt="..."
-              />
+              <>
+                {image1 && (
+                  <img
+                    className="card-img-top card-img-back"
+                    src={
+                      image1 === "https://salt.tikicdn.com/assets/img/image.svg"
+                        ? tiki
+                        : image1
+                    }
+                    alt="..."
+                  />
+                )}
+                {image2 ? (
+                  <img
+                    className="card-img-top card-img-front"
+                    style={{ height: "100%" }}
+                    src={
+                      image2 === "https://salt.tikicdn.com/assets/img/image.svg"
+                        ? tiki
+                        : image2
+                    }
+                    alt="..."
+                  />
+                ) : (
+                  <img
+                    className="card-img-top card-img-back"
+                    src={
+                      image1 === "https://salt.tikicdn.com/assets/img/image.svg"
+                        ? tiki
+                        : image1
+                    }
+                    alt="..."
+                  />
+                )}
+              </>
             )}
           </a>
           {/* Actions */}
@@ -93,19 +102,27 @@ export default function ProductItem(props) {
         <div className="card-body px-0">
           {/* Category */}
           <div className="font-size-xs">
-            <a className="text-muted" href="shop.html">
-              {name}
-            </a>
+            {/* <a className="text-muted" href="shop.html">
+              {loading ? (
+                <Skeleton variant="rect" width="100%" height={20} />
+              ) : (
+                { name }
+              )}
+            </a> */}
           </div>
           {/* Title */}
-          <div className="font-weight-bold">
-            <a className="text-body" href="product.html">
-              Leather mid-heel Sandals
-            </a>
-          </div>
+          {loading === true ? (
+            <Skeleton variant="rect" width="100%" height={20} />
+          ) : (
+            <>{name}</>
+          )}
           {/* Price */}
           <div className="font-weight-bold text-muted">
-            {numberWithCommas(real_price)} VND
+            {loading === true ? (
+              <Skeleton variant="rect" width="100%" height={20} />
+            ) : (
+              <>{numberWithCommas(real_price)} VND</>
+            )}
           </div>
         </div>
       </div>

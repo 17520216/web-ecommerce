@@ -8,7 +8,7 @@ let initialValue = {
   amount: amount,
   ship: 0,
 };
-export default function user(state = initialValue, action) {
+export default function cart(state = initialValue, action) {
   switch (action.type) {
     case GET_CART:
       let { listCart, amount, num } = state;

@@ -68,6 +68,7 @@ export default function user(state = initialValue, action) {
       return {
         ...state,
         dataUser: action.payload,
+        loading: false,
       };
     default:
       return state;

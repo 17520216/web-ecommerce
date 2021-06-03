@@ -8,7 +8,7 @@ import {
 } from "../action/user";
 import userApi from "../../api/userApi";
 import productApi from "../../api/productApi";
-import { getPro } from "../action/product";
+import { getPro, actionLoading } from "../action/product";
 export function* fetchLogin({ payload }) {
   let res = yield call(userApi.login, payload);
   if (res.error) {
@@ -21,6 +21,7 @@ export function* fetchLogin({ payload }) {
   }
 }
 export function* fetchProduct({ payload }) {
+  yield put(actionLoading());
   let res = yield call(productApi.product, payload);
   localStorage.setItem("localProduct", JSON.stringify(res));
   yield put(getPro(res));

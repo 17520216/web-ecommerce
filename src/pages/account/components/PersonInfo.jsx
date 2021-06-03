@@ -1,8 +1,7 @@
 import ReactLoading from "react-loading";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUpdate } from "../../../redux/action/user";
-import Loading from "../../../components/Loading";
+import { fetchUpdate, setLoading } from "../../../redux/action/user";
 import useFormValidate from "../../../core/ReactHook/useFormValidate";
 
 export default function PersonInfo() {
@@ -30,6 +29,7 @@ export default function PersonInfo() {
       email: dataUser.email,
       password: "",
       confirmPassword: "",
+      gender: dataUser.gender || "male",
     },
     {
       rule: {
@@ -72,6 +72,7 @@ export default function PersonInfo() {
     let err = onSubmit({ exclude });
 
     if (Object.keys(err).length === 0) {
+      dispatch(setLoading(true));
       dispatch(fetchUpdate({ ...form, birthday: send }));
     }
   }
@@ -243,10 +244,24 @@ export default function PersonInfo() {
             <label>Gender</label>
             <div className="btn-group-toggle" data-toggle="buttons">
               <label className="btn btn-sm btn-outline-border active">
-                <input type="radio" name="gender" defaultChecked /> Male
+                <input
+                  name="gender"
+                  value="female"
+                  type="radio"
+                  onClick={inputChange}
+                  checked={form.gender === "female"}
+                />
+                Female
               </label>
               <label className="btn btn-sm btn-outline-border">
-                <input type="radio" name="gender" /> Female
+                <input
+                  onClick={inputChange}
+                  name="gender"
+                  value="male"
+                  type="radio"
+                  checked={form.gender === "male"}
+                />
+                Male
               </label>
             </div>
           </div>
