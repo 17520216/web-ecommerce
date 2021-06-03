@@ -1,5 +1,6 @@
 const productApi = {
   product: (strUrl) => {
+    console.log("strUrl", strUrl);
     return fetch(`http://cfd-reactjs.herokuapp.com/product?${strUrl}`, {
       method: "GET",
       headers: {

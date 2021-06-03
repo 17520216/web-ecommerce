@@ -1,3 +1,22 @@
+import { Link } from "react-router-dom";
+function convertQueryToObject() {
+  var search = window.location.search.substring(1);
+  return !search
+    ? {}
+    : JSON.parse(
+        '{"' +
+          decodeURI(search.replace(/&/g, '","').replace(/=/g, '":"')) +
+          '"}'
+      );
+}
+const reverse = function (obj) {
+  var str = [];
+  for (var p in obj)
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  return str.join("&");
+};
 export default function SideBar({ catagories }) {
   return (
     <div className="col-12 col-md-4 col-lg-3">
@@ -18,10 +37,19 @@ export default function SideBar({ catagories }) {
               <div className="form-group">
                 <ul className="list-styled mb-0" id="productsNav">
                   {catagories?.map((e) => (
-                    <li key={e._id} className="list-styled-item">
-                      <a className="list-styled-link" href="#">
+                    <li
+                      key={e._id}
+                      className="list-styled-item font-weight-bold"
+                    >
+                      <Link
+                        to={`/shop?${reverse({
+                          ...convertQueryToObject(),
+                          categories: e.id,
+                        })}`}
+                        className="list-styled-link"
+                      >
                         {e.title}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

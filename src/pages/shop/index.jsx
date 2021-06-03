@@ -1,5 +1,5 @@
 import SideBar from "./component/SideBar";
-import Slider from "./component/Silder";
+import Slider from "./component/Slider";
 import ProductItem from "./component/ProductItem";
 import { useEffect } from "react";
 import { fetchProduct, fetchCategory } from "../../redux/action/product";
@@ -27,18 +27,13 @@ const reverse = function (obj) {
   return str.join("&");
 };
 
-function getPage() {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get("page");
-}
-
 export default function Shop() {
   const dispatch = useDispatch();
   const { product, paging, catagories } = useSelector((state) => state.product);
-  const page = getPage();
 
   let queryUrl = convertQueryToObject();
   let strUrl = reverse(queryUrl);
+  console.log("strUrl", strUrl);
   useEffect(() => {
     dispatch(fetchProduct(strUrl));
     dispatch(fetchCategory());
@@ -106,6 +101,12 @@ export default function Shop() {
                       value="rating_average.-1"
                     >
                       High Rating
+                    </option>
+                    <option
+                      selected={queryUrl.sort === "discount_rate.-1"}
+                      value="discount_rate.-1"
+                    >
+                      High Discount
                     </option>
                   </select>
                 </div>

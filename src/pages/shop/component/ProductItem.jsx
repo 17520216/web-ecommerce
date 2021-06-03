@@ -6,7 +6,7 @@ import { numberWithCommas } from "../../../utils/format";
 export default function ProductItem(props) {
   let { loading } = useSelector((state) => state.product);
   const dispatch = useDispatch();
-  const { name, images, real_price } = props;
+  const { name, images, real_price, rating_average } = props;
   let image1 = images?.[0]?.medium_url;
 
   let image2 = images?.[0]?.medium_url;
@@ -111,10 +111,39 @@ export default function ProductItem(props) {
             </a> */}
           </div>
           {/* Title */}
+          <div class="font-weight-bold">
+            <a class="text-body" href="product.html">
+              {loading === true ? (
+                <Skeleton variant="rect" width="100%" height={20} />
+              ) : (
+                <>{name}</>
+              )}
+            </a>
+          </div>
+
           {loading === true ? (
             <Skeleton variant="rect" width="100%" height={20} />
           ) : (
-            <>{name}</>
+            <div
+              class="rating font-size-sm text-dark"
+              data-value={rating_average}
+            >
+              <div class="rating-item">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="rating-item">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="rating-item">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="rating-item">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="rating-item">
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
           )}
           {/* Price */}
           <div className="font-weight-bold text-muted">
