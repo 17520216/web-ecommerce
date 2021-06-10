@@ -1,4 +1,12 @@
+import { useRef, useEffect } from "react";
+let $ = window.$;
 export default function Review() {
+  let ref = useRef();
+  useEffect(() => {
+    $(ref.current).flickity({
+      pageDots: true,
+    });
+  });
   return (
     <section className="py-12">
       <div className="container">
@@ -13,7 +21,7 @@ export default function Review() {
         <div className="row">
           <div className="col-12">
             {/* Slider */}
-            <div data-flickity='{"pageDots": true}'>
+            <div ref={ref} data-flickity='{"pageDots": true}'>
               <div className="col-12 col-sm-8 col-md-6 col-lg-4">
                 {/* Card */}
                 <div className="card-lg card border">

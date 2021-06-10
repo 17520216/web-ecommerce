@@ -29,11 +29,12 @@ const reverse = function (obj) {
 
 export default function Shop() {
   const dispatch = useDispatch();
-  const { product, paging, catagories } = useSelector((state) => state.product);
+  const { product, paging, categories, loading } = useSelector(
+    (state) => state.product
+  );
 
   let queryUrl = convertQueryToObject();
   let strUrl = reverse(queryUrl);
-  console.log("strUrl", strUrl);
   useEffect(() => {
     dispatch(fetchProduct(strUrl));
     dispatch(fetchCategory());
@@ -49,22 +50,26 @@ export default function Shop() {
     if (value === "") {
       delete queryObj.sort;
     }
+    delete queryObj.page;
     let queryUrl = reverse(queryObj);
     history.push(`${path}?${queryUrl}`);
   }
-
+  let queryObj = convertQueryToObject();
+  let title = categories.find((e) => e.id == queryObj.categories);
   return (
     <>
       <section className="py-11">
         <div className="container">
           <div className="row">
-            <SideBar catagories={catagories} />
+            <SideBar categories={categories} />
             <div className="col-12 col-md-8 col-lg-9">
               <Slider />
               <div className="row align-items-center mb-7">
                 <div className="col-12 col-md">
                   {/* Heading */}
-                  <h3 className="mb-1">Womens' Clothing</h3>
+                  <h3 className="mb-1">
+                    {title ? title.title : "All Product"}
+                  </h3>
                   {/* Breadcrumb */}
                   <ol className="breadcrumb mb-md-0 font-size-xs text-gray-400">
                     <li className="breadcrumb-item">
@@ -72,7 +77,9 @@ export default function Shop() {
                         Home
                       </a>
                     </li>
-                    <li className="breadcrumb-item active">Women's Clothing</li>
+                    <li className="breadcrumb-item active">
+                      {title ? title?.title : "All Product"}
+                    </li>
                   </ol>
                 </div>
                 <div className="col-12 col-md-auto">
@@ -165,6 +172,7 @@ export default function Shop() {
                 </div>
               </div>
               {/* Products */}
+
               <div className="row">
                 {product?.data?.map((e, i) => (
                   <ProductItem key={i} {...e} />

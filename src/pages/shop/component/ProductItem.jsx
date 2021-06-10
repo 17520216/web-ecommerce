@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { addCart } from "../../../redux/action/cart";
 import { Skeleton } from "@material-ui/lab";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +7,7 @@ import { numberWithCommas } from "../../../utils/format";
 export default function ProductItem(props) {
   let { loading } = useSelector((state) => state.product);
   const dispatch = useDispatch();
-  const { name, images, real_price, rating_average } = props;
+  const { name, images, real_price, rating_average, slug } = props;
   let image1 = images?.[0]?.medium_url;
 
   let image2 = images?.[0]?.medium_url;
@@ -27,7 +28,7 @@ export default function ProductItem(props) {
         {/* Image */}
         <div className="card-img">
           {/* Image */}
-          <a className="card-img-hover" href="product.html">
+          <Link className="card-img-hover" to={`shop/${slug}`}>
             {loading === true ? (
               <Skeleton variant="rect" width="100%" height={252} />
             ) : (
@@ -67,7 +68,7 @@ export default function ProductItem(props) {
                 )}
               </>
             )}
-          </a>
+          </Link>
           {/* Actions */}
           <div className="card-actions">
             <span className="card-action">

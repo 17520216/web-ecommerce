@@ -17,7 +17,12 @@ const reverse = function (obj) {
     }
   return str.join("&");
 };
-export default function SideBar({ catagories }) {
+export default function SideBar({ categories }) {
+  let obj = convertQueryToObject();
+  if (obj.page) {
+    delete obj.page;
+  }
+
   return (
     <div className="col-12 col-md-4 col-lg-3">
       {/* Filters */}
@@ -36,14 +41,14 @@ export default function SideBar({ catagories }) {
             <div className="collapse show" id="categoryCollapse">
               <div className="form-group">
                 <ul className="list-styled mb-0" id="productsNav">
-                  {catagories?.map((e) => (
+                  {categories?.map((e) => (
                     <li
                       key={e._id}
                       className="list-styled-item font-weight-bold"
                     >
                       <Link
                         to={`/shop?${reverse({
-                          ...convertQueryToObject(),
+                          ...obj,
                           categories: e.id,
                         })}`}
                         className="list-styled-link"

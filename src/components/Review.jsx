@@ -1,4 +1,48 @@
-export default function Review() {
+import { useState } from "react";
+import reviewApi from "../api/reviewApi";
+export default function Review(props) {
+  let {
+    title,
+    content,
+    createAt,
+    email,
+    name,
+    clickComment,
+    rating,
+    like,
+    dislike,
+    id,
+    active,
+  } = props;
+
+  let [vote, setVote] = useState(like || 0);
+  let [bad, setBad] = useState(dislike || 0);
+  async function handleVote(e) {
+    e.preventDefault();
+
+    setVote(vote + 1);
+    let res = await reviewApi.putReview(
+      {
+        ...props,
+        dislike: bad,
+        like: vote + 1,
+      },
+      id
+    );
+  }
+  async function handleBad(e) {
+    e.preventDefault();
+
+    setBad(bad + 1);
+    let res = await reviewApi.putReview(
+      {
+        ...props,
+        dislike: bad + 1,
+        like: vote,
+      },
+      id
+    );
+  }
   return (
     <div className="review">
       <div className="review-body">
@@ -16,7 +60,10 @@ export default function Review() {
             <div className="row mb-6">
               <div className="col-12">
                 {/* Rating */}
-                <div className="rating font-size-sm text-dark" data-value={5}>
+                <div
+                  className="rating font-size-sm text-dark"
+                  data-value={rating}
+                >
                   <div className="rating-item">
                     <i className="fas fa-star" />
                   </div>
@@ -37,19 +84,16 @@ export default function Review() {
               <div className="col-12">
                 {/* Time */}
                 <span className="font-size-xs text-muted">
-                  Logan Edwards, <time dateTime="2019-07-25">25 Jul 2019</time>
+                  {name}, <time dateTime={createAt}>{createAt}</time>
                 </span>
+                <br />
+                <span className="font-size-xs text-muted">{email}</span>
               </div>
             </div>
             {/* Title */}
-            <p className="mb-2 font-size-lg font-weight-bold">So cute!</p>
+            <p className="mb-2 font-size-lg font-weight-bold">{title}</p>
             {/* Text */}
-            <p className="text-gray-500">
-              Justo ut diam erat hendrerit. Morbi porttitor, per eu. Sodales
-              curabitur diam sociis. Taciti lobortis nascetur. Ante laoreet odio
-              hendrerit. Dictumst curabitur nascetur lectus potenti dis
-              sollicitudin habitant quis vestibulum.
-            </p>
+            <p className="text-gray-500">{content}</p>
             {/* Footer */}
             <div className="row align-items-center">
               <div className="col-auto d-none d-lg-block">
@@ -62,32 +106,49 @@ export default function Review() {
                   <a
                     className="rate-item"
                     data-toggle="vote"
-                    data-count={3}
+                    data-count={vote}
                     href="#"
+                    onClick={handleVote}
                     role="button"
                   >
-                    <i className="fe fe-thumbs-up" />
+                    <i
+                      style={{ marginRight: "8px" }}
+                      className="fe fe-thumbs-up"
+                    />
                   </a>
                   <a
+                    onClick={handleBad}
                     className="rate-item"
                     data-toggle="vote"
-                    data-count={0}
+                    data-count={bad}
                     href="#"
                     role="button"
                   >
-                    <i className="fe fe-thumbs-down" />
+                    <i
+                      style={{ marginRight: "8px" }}
+                      className="fe fe-thumbs-down"
+                    />
                   </a>
                 </div>
               </div>
               <div className="col-auto d-none d-lg-block">
                 {/* Text */}
-                <p className="mb-0 font-size-sm">Comments (0)</p>
+                {/* <p className="mb-0 font-size-sm">Comments (0)</p> */}
               </div>
               <div className="col-auto">
                 {/* Button */}
-                <a className="btn btn-xs btn-outline-border" href="#!">
-                  Comment
-                </a>
+                {active ? (
+                  <a
+                    onClick={clickComment}
+                    className="btn btn-xs btn-outline-border"
+                    data-toggle="collapse"
+                    href="#reviewForm"
+                  >
+                    Comment
+                  </a>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>

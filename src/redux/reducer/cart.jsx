@@ -14,53 +14,55 @@ export default function cart(state = initialValue, action) {
       let { listCart, amount, num } = state;
       const index = listCart.findIndex((e) => e._id === action.payload._id);
       if (index !== -1) {
-        listCart[index].numCart++;
-        amount += listCart[index].real_price;
+        action.payload.numCart = action.payload.num || 1;
+        listCart[index].numCart =
+          listCart[index].numCart + action.payload.numCart;
+        amount = amount + listCart[index].real_price * action.payload.numCart;
       } else {
-        action.payload.numCart = 1;
+        action.payload.numCart = action.payload.num || 1;
         listCart.push(action.payload);
-        amount += action.payload.real_price;
+        amount = amount + action.payload.real_price * action.payload.numCart;
       }
+      console.log(typeof action.payload.num);
       localStorage.setItem("cart", JSON.stringify(listCart));
       localStorage.setItem("amount", JSON.stringify(amount));
       return {
         ...state,
-        num: num + 1,
+        num: num + action.payload.numCart,
         listCart,
         amount,
       };
     case REMOVE_CART: {
-      let { listCart, amount } = state;
+      let { listCart, amount, num } = state;
       const index = listCart.findIndex((e) => e._id === action.payload);
       amount = amount - listCart[index].numCart * listCart[index].real_price;
+      num = num - listCart[index].numCart;
       if (index >= 0) {
         listCart.splice(index, 1);
       }
-      localStorage.removeItem("cart");
-      localStorage.removeItem("amount");
       localStorage.setItem("amount", JSON.stringify(amount));
       localStorage.setItem("cart", JSON.stringify(listCart));
       return {
         ...state,
-        num: state.num - 1,
+        num,
         listCart,
         amount,
       };
     }
     case INCREASE_CART: {
-      let { listCart, amount } = state;
+      let { listCart, amount, num } = state;
       const index = listCart.findIndex((e) => e._id === action.payload);
       if (index >= 0) {
         listCart[index].numCart++;
         amount += listCart[index].real_price;
       }
-      localStorage.removeItem("cart");
       localStorage.setItem("amount", JSON.stringify(amount));
       localStorage.setItem("cart", JSON.stringify(listCart));
       return {
         ...state,
         listCart,
         amount,
+        num: num + 1,
       };
     }
     case DECREASE_CART: {
@@ -71,7 +73,6 @@ export default function cart(state = initialValue, action) {
         listCart[index].numCart--;
         if (listCart[index].numCart === 0) {
           listCart.splice(index, 1);
-          num -= 1;
         }
       }
       localStorage.setItem("amount", JSON.stringify(amount));
@@ -80,7 +81,7 @@ export default function cart(state = initialValue, action) {
         ...state,
         listCart,
         amount,
-        num,
+        num: num - 1,
       };
     }
 

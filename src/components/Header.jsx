@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useTranslate } from "../core/Translate";
 export default function Header() {
   const { login } = useSelector((state) => state.user);
-  const { listCart } = useSelector((state) => state.cart);
+  const { num } = useSelector((state) => state.cart);
   let { lang, t, setLang } = useTranslate();
 
   function changeLang(lang) {
@@ -706,79 +706,10 @@ export default function Header() {
             <ul className="navbar-nav mx-auto">
               <li className="nav-item dropdown">
                 {/* Toggle */}
-                <Link className="nav-link" data-toggle="dropdown" to="/">
+                <NavLink className="nav-link" exact to="/">
                   Home
-                </Link>
+                </NavLink>
                 {/* Menu */}
-                <div className="dropdown-menu">
-                  <div className="card card-lg">
-                    <div className="card-body">
-                      <ul className="list-styled font-size-sm">
-                        <li className="list-styled-item">
-                          <Link className="list-styled-link" to="/">
-                            Default
-                          </Link>
-                        </li>
-                        <li className="list-styled-item">
-                          <a
-                            className="list-styled-link"
-                            href="./index-classic.html"
-                          >
-                            Classic
-                          </a>
-                        </li>
-                        <li className="list-styled-item">
-                          <a
-                            className="list-styled-link"
-                            href="./index-fashion.html"
-                          >
-                            Fashion
-                          </a>
-                        </li>
-                        <li className="list-styled-item">
-                          <a
-                            className="list-styled-link"
-                            href="./index-boxed.html"
-                          >
-                            Boxed
-                          </a>
-                        </li>
-                        <li className="list-styled-item">
-                          <a
-                            className="list-styled-link"
-                            href="./index-simple.html"
-                          >
-                            Simple
-                          </a>
-                        </li>
-                        <li className="list-styled-item">
-                          <a
-                            className="list-styled-link"
-                            href="./index-asymmetric.html"
-                          >
-                            Asymmetric
-                          </a>
-                        </li>
-                        <li className="list-styled-item">
-                          <a
-                            className="list-styled-link"
-                            href="./index-sidenav.html"
-                          >
-                            Sidenav
-                          </a>
-                        </li>
-                        <li className="list-styled-item">
-                          <a
-                            className="list-styled-link"
-                            href="./index-landing.html"
-                          >
-                            Landing
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
               </li>
               <li className="nav-item dropdown position-static">
                 {/* Toggle */}
@@ -1269,7 +1200,7 @@ export default function Header() {
                   data-toggle="modal"
                   href="#modalShoppingCart"
                 >
-                  <span data-cart-items={listCart.length}>
+                  <span data-cart-items={num}>
                     <i className="fe fe-shopping-cart" />
                   </span>
                 </a>

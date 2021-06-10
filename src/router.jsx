@@ -103,6 +103,7 @@ const routers = [
         component: Contact,
       },
       {
+        exact: true,
         path: "/shop",
         component: Shop,
       },
@@ -111,7 +112,7 @@ const routers = [
         component: CheckOut,
       },
       {
-        path: "/product",
+        path: "/shop/:slug",
         component: Products,
       },
       {
