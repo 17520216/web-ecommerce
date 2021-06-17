@@ -43,11 +43,11 @@ export default function NewCus() {
   function handleSubmit(e) {
     e.preventDefault();
     let err = onSubmit();
-    console.log(err);
     if (Object.keys(err).length === 0) {
       dispatch(fetchRegister(form));
     }
   }
+
   return (
     <div className="col-12 col-md-6">
       {/* Card */}

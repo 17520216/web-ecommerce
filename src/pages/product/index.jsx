@@ -112,6 +112,8 @@ export default function Products() {
         slug: params.slug,
         createAt: time,
         rating: rating,
+        like: 0,
+        dislike: 0,
       });
       if (res) {
         reviewApi.review(params.slug).then((res) =>
@@ -134,6 +136,16 @@ export default function Products() {
     e.preventDefault();
     setRating(e.target.dataset.value);
   }
+
+  function reverseArr(input) {
+    var ret = new Array();
+    for (var i = input.length - 1; i >= 0; i--) {
+      ret.push(input[i]);
+    }
+    return ret;
+  }
+  let temp = reverseArr(review.dataReview);
+  console.log("temp", temp);
 
   if (state.loading) {
     return <Loading />;
@@ -405,31 +417,7 @@ export default function Products() {
                     </div>
                   </div> */}
                 </div>
-                <div className="col-12 col-md text-md-center">
-                  {/* Rating */}
-                  {/* <div
-                    className="rating text-dark h6 mb-4 mb-md-0"
-                    data-value={4}
-                  >
-                    <div className="rating-item">
-                      <i className="fas fa-star" />
-                    </div>
-                    <div className="rating-item">
-                      <i className="fas fa-star" />
-                    </div>
-                    <div className="rating-item">
-                      <i className="fas fa-star" />
-                    </div>
-                    <div className="rating-item">
-                      <i className="fas fa-star" />
-                    </div>
-                    <div className="rating-item">
-                      <i className="fas fa-star" />
-                    </div>
-                  </div> */}
-                  {/* Count */}
-                  {/* <strong className="font-size-sm ml-2">Reviews (3)</strong> */}
-                </div>
+                <div className="col-12 col-md text-md-center"></div>
                 <div
                   className="col-12 col-md-auto"
                   style={{ marginBottom: "20px" }}
@@ -575,7 +563,7 @@ export default function Products() {
                   </div>
                 </form>
               </div>
-              {review.dataReview?.map((e, i) => (
+              {temp?.map((e, i) => (
                 <Review
                   active={dropdown}
                   clickComment={openReview}

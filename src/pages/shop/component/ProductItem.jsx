@@ -12,7 +12,6 @@ export default function ProductItem(props) {
 
   let image2 = images?.[0]?.medium_url;
   let tiki = "/img/products/product-7.jpg";
-
   function handleAddCart() {
     dispatch(addCart({ ...props }));
   }
@@ -127,7 +126,7 @@ export default function ProductItem(props) {
           ) : (
             <div
               class="rating font-size-sm text-dark"
-              data-value={rating_average}
+              data-value={rating_average + 1}
             >
               <div class="rating-item">
                 <i class="fas fa-star"></i>

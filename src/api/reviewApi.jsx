@@ -16,9 +16,7 @@ const reviewApi = {
     }).then((res) => res.json());
   },
   putReview: (review, id) => {
-    return axios.put(`http://localhost:5000/data/${id}`, {
-      ...review,
-    });
+    return axios.put(`http://localhost:5000/data/${id}`, review);
   },
 };
 export default reviewApi;

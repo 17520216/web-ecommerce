@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import ModalCart from "../components/ModalCart";
 import Footer from "../components/Footer";
 import Message from "../components/Message";
+import { ModalSearch } from "../components/ModalSearch";
 
 export default function MainLayout({ children }) {
   return (
@@ -11,6 +12,7 @@ export default function MainLayout({ children }) {
       {children}
       <Footer />
       <ModalCart />
+      <ModalSearch />
     </>
   );
 }
