@@ -6,12 +6,10 @@ const productApi = {
   category: () => {
     return Api.get(`categories`);
   },
-
-  productDetail: (slug) => {
-    return fetch(
-      `http://cfd-reactjs.herokuapp.com/product?slug=${slug}`
-    ).then((res) => res.json());
+  productDetail(slug) {
+    return Api.get(`product?slug=${slug}`);
   },
+
   searchProduct: (slug) => {
     return Api.get(`product?title=${slug}`);
   },

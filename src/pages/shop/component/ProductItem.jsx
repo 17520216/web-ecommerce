@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { addCart } from "../../../redux/action/cart";
+import { fetchWishList } from "../../../redux/action/user";
 import { Skeleton } from "@material-ui/lab";
 import { useDispatch, useSelector } from "react-redux";
 import { numberWithCommas } from "../../../utils/format";
@@ -15,6 +16,9 @@ export default function ProductItem(props) {
   function handleAddCart() {
     dispatch(addCart({ ...props }));
   }
+  const addWishList = () => {
+    dispatch(fetchWishList({ ...props }));
+  };
 
   return (
     <div className="col-6 col-md-4">
@@ -92,6 +96,7 @@ export default function ProductItem(props) {
               <button
                 className="btn btn-xs btn-circle btn-white-primary"
                 data-toggle="button"
+                onClick={addWishList}
               >
                 <i className="fe fe-heart" />
               </button>

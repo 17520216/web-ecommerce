@@ -1,5 +1,6 @@
 import { call, put } from "redux-saga/effects";
 import {
+  addWishList,
   loginError,
   login,
   registerError,
@@ -47,5 +48,16 @@ export function* fetchCategory() {
   if (res) {
     localStorage.setItem("categories", JSON.stringify(res));
     yield put(getCategory(res));
+  }
+}
+export function* fetchWishList({ payload }) {
+  yield call(userApi.wishList, payload);
+}
+
+export function* getWishList() {
+  let res = yield call(userApi.getWishList);
+  if (res.data) {
+    localStorage.setItem("wishList", JSON.stringify(res.data));
+    yield put(addWishList(res.data));
   }
 }

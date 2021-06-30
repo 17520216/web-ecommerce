@@ -1,9 +1,10 @@
-import { GET_PRODUCT, LOADING_PRO, GET_CATEGORY } from "../type";
+import { GET_WISH_LIST, GET_PRODUCT, LOADING_PRO, GET_CATEGORY } from "../type";
 let initialValue = {
   product: JSON.parse(localStorage.getItem("localProduct")) || [],
   paging: "",
   loading: true,
   categories: JSON.parse(localStorage.getItem("categories")) || [],
+  wishlist: [],
 };
 export default function product(state = initialValue, action) {
   switch (action.type) {
@@ -23,6 +24,11 @@ export default function product(state = initialValue, action) {
       return {
         ...state,
         loading: true,
+      };
+    case GET_WISH_LIST:
+      return {
+        ...state,
+        wishlist: action.payload,
       };
 
     default:

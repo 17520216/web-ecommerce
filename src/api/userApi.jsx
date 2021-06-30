@@ -6,8 +6,15 @@ const userApi = {
   register: (data) => {
     return Api.post("register", data);
   },
-  async updateInfo(data) {
+  updateInfo(data) {
     return Api.token().post("update-profile", data);
+  },
+
+  wishList: (data) => {
+    return Api.token().post("ecommerce/v1/profile/wishlist", data);
+  },
+  getWishList: () => {
+    return Api.token().get("ecommerce/v1/profile/wishlist");
   },
 };
 export default userApi;

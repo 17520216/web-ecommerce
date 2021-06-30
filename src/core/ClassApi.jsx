@@ -44,6 +44,7 @@ class Api {
     return headers;
   }
   async request(url, options) {
+    console.log("option", options);
     let response = await fetch(url, options);
     if (response.status === 200) {
       return response;
@@ -63,6 +64,7 @@ class Api {
     return this.request(`${domain}${url}`, { headers }).then(this.json);
   }
   post(url, data = {}) {
+    console.log("data", data);
     let headers = this.setupHeader();
     let body = JSON.stringify(data);
     return this.request(`${domain}${url}`, {

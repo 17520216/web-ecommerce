@@ -140,12 +140,7 @@ export function CartItem(props) {
                 +
               </button>
             </div>
-            {/* <select className="custom-select custom-select-xxs w-auto">
-              <option value={1}>1</option>
-              <option value={1}>2</option>
-              <option value={1}>3</option>
-            </select> */}
-            {/* Remove */}
+
             <a
               className="font-size-xs text-gray-400 ml-auto"
               href="#!"

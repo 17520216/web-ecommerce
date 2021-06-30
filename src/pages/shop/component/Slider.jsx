@@ -106,7 +106,7 @@ export default function Slider() {
     <div
       ref={thisRef}
       className="flickity-page-dots-inner mb-9"
-      data-flickity='{"pageDots": true}'
+      // data-flickity='{"pageDots": true}'
     >
       {/* Item */}
       <div className="w-100">
@@ -118,7 +118,7 @@ export default function Slider() {
             <div className="col-12 col-md-10 col-lg-8 col-xl-6 align-self-center">
               <div className="card-body px-md-10 py-11">
                 {/* Heading */}
-                <h4>2019 Summer Collection</h4>
+                <h4>2021 Summer Collection</h4>
                 {/* Button */}
                 <a className="btn btn-link px-0 text-body" href="shop.html">
                   View Collection <i className="fe fe-arrow-right ml-2" />

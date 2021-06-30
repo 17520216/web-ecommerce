@@ -1,4 +1,5 @@
 import {
+  WISHLIST,
   LOGIN_ERROR,
   AUTH_FETCH_LOGIN,
   MAKE_LOGIN,
@@ -9,6 +10,8 @@ import {
   FETCH_UPDATE,
   UPDATE,
   SET_LOADING,
+  FETCH_WISH_LIST,
+  GET_WISH_LIST,
 } from "../type";
 export function fetchLogin(form) {
   return {
@@ -72,4 +75,19 @@ export function setLoading(data) {
     type: SET_LOADING,
     payload: data,
   };
+}
+export function fetchWishList(data) {
+  return {
+    type: FETCH_WISH_LIST,
+    payload: data,
+  };
+}
+export function addWishList(data) {
+  return {
+    type: GET_WISH_LIST,
+    payload: data,
+  };
+}
+export function getWishList() {
+  return { type: WISHLIST };
 }

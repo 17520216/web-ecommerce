@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import useFormValidate from "../../../core/ReactHook/useFormValidate";
 import { fetchRegister } from "../../../redux/action/user";
+
 export default function NewCus() {
   let dispatch = useDispatch();
   let { registerErr, registerSuccess } = useSelector((state) => state.user);
