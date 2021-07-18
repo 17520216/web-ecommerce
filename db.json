@@ -50,6 +50,19 @@
       "like": 0,
       "dislike": 0,
       "id": 4
+    },
+    {
+      "active": false,
+      "name": "Nguyen An",
+      "email": "nguyenna@gmail.com",
+      "title": "Review Iphone",
+      "content": "This is A good smart phone",
+      "slug": "dien-thoai-iphone-12-pro-max-512gb-hang-chinh-hang-p71197208",
+      "createAt": "07-17-2021 08:03:42",
+      "rating": "5",
+      "like": 4,
+      "dislike": 1,
+      "id": 5
     }
   ]
 }

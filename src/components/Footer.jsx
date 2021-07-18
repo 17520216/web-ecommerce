@@ -159,17 +159,17 @@ export default function Footer() {
               <ul className="list-unstyled mb-0">
                 <li>
                   <a className="text-gray-300" href="#!">
-                    1-202-555-0105
+                    17520216
                   </a>
                 </li>
                 <li>
                   <a className="text-gray-300" href="#!">
-                    1-202-555-0106
+                    17520216
                   </a>
                 </li>
                 <li>
                   <a className="text-gray-300" href="#!">
-                    help@shopper.com
+                    17520216@gm.uit.edu.vn
                   </a>
                 </li>
               </ul>

@@ -1,8 +1,18 @@
+import { useSelector } from "react-redux";
+import { numberWithCommas } from "../../../utils/format";
+import { useRouteMatch } from "react-router";
+import { Link } from "react-router-dom";
 export default function OrderDetail() {
+  let { order } = useSelector((state) => state.user);
+
+  let { slug } = useRouteMatch().params;
+
+  let dataRender = order.find((e) => e._id === slug);
+
   return (
     <>
       {/* Order */}
-      <div className="card card-lg mb-5 border">
+      <div className="card card-lg mb-5 bdataRender">
         <div className="card-body pb-0">
           {/* Info */}
           <div className="card card-sm">
@@ -13,7 +23,7 @@ export default function OrderDetail() {
                   <h6 className="heading-xxxs text-muted">Order No:</h6>
                   {/* Text */}
                   <p className="mb-lg-0 font-size-sm font-weight-bold">
-                    673290789
+                    {dataRender._id}
                   </p>
                 </div>
                 <div className="col-6 col-lg-3">
@@ -21,7 +31,7 @@ export default function OrderDetail() {
                   <h6 className="heading-xxxs text-muted">Shipped date:</h6>
                   {/* Text */}
                   <p className="mb-lg-0 font-size-sm font-weight-bold">
-                    <time dateTime="2019-10-01">01 Oct, 2019</time>
+                    <time dateTime="2021-10-01">Today</time>
                   </p>
                 </div>
                 <div className="col-6 col-lg-3">
@@ -36,7 +46,9 @@ export default function OrderDetail() {
                   {/* Heading */}
                   <h6 className="heading-xxxs text-muted">Order Amount:</h6>
                   {/* Text */}
-                  <p className="mb-0 font-size-sm font-weight-bold">$259.00</p>
+                  <p className="mb-0 font-size-sm font-weight-bold">
+                    {dataRender.amount && numberWithCommas(dataRender.amount)}
+                  </p>
                 </div>
               </div>
             </div>
@@ -44,100 +56,49 @@ export default function OrderDetail() {
         </div>
         <div className="card-footer">
           {/* Heading */}
-          <h6 className="mb-7">Order Items (3)</h6>
+          <h6 className="mb-7">Order Items ({dataRender.listCart.length})</h6>
           {/* Divider */}
           <hr className="my-5" />
           {/* List group */}
           <ul className="list-group list-group-lg list-group-flush-y list-group-flush-x">
-            <li className="list-group-item">
-              <div className="row align-items-center">
-                <div className="col-4 col-md-3 col-xl-2">
-                  {/* Image */}
-                  <a href="product.html">
-                    <img
-                      src="/img/products/product-6.jpg"
-                      alt="..."
-                      className="img-fluid"
-                    />
-                  </a>
-                </div>
-                <div className="col">
-                  {/* Title */}
-                  <p className="mb-4 font-size-sm font-weight-bold">
-                    <a className="text-body" href="product.html">
-                      Cotton floral print Dress x 1
-                    </a>{" "}
-                    <br />
-                    <span className="text-muted">$40.00</span>
-                  </p>
-                  {/* Text */}
-                  <div className="font-size-sm text-muted">
-                    Size: M <br />
-                    Color: Red
+            {dataRender.listCart.map((e, i) => (
+              <Link to={`/shop/${e.slug}`} className="list-group-item" key={i}>
+                <div className="row align-items-center">
+                  <div className="col-4 col-md-3 col-xl-2">
+                    {/* Image */}
+                    <a href="product.html">
+                      <img
+                        src={e.images[0].medium_url}
+                        alt="..."
+                        className="img-fluid"
+                      />
+                    </a>
+                  </div>
+                  <div className="col">
+                    {/* Title */}
+                    <p className="mb-4 font-size-sm font-weight-bold">
+                      <a className="text-body" href="product.html">
+                        {e.name} x {e.numCart}
+                      </a>{" "}
+                      <br />
+                      <span className="text-muted">
+                        {numberWithCommas(e.real_price)}
+                      </span>
+                    </p>
+                    {/* Text */}
+                    {/* <div className="font-size-sm text-muted">
+                      Size: M <br />
+                      Color: Red
+                    </div> */}
                   </div>
                 </div>
-              </div>
-            </li>
-            <li className="list-group-item">
-              <div className="row align-items-center">
-                <div className="col-4 col-md-3 col-xl-2">
-                  {/* Image */}
-                  <a href="product.html">
-                    <img
-                      src="/img/products/product-10.jpg"
-                      alt="..."
-                      className="img-fluid"
-                    />
-                  </a>
-                </div>
-                <div className="col">
-                  {/* Title */}
-                  <p className="mb-4 font-size-sm font-weight-bold">
-                    <a className="text-body" href="product.html">
-                      Suede cross body Bag x 1
-                    </a>{" "}
-                    <br />
-                    <span className="text-muted">$49.00</span>
-                  </p>
-                  {/* Text */}
-                  <div className="font-size-sm text-muted">Color: Brown</div>
-                </div>
-              </div>
-            </li>
-            <li className="list-group-item">
-              <div className="row align-items-center">
-                <div className="col-4 col-md-3 col-xl-2">
-                  {/* Image */}
-                  <a href="product.html">
-                    <img
-                      src="/img/products/product-48.jpg"
-                      alt="..."
-                      className="img-fluid"
-                    />
-                  </a>
-                </div>
-                <div className="col">
-                  {/* Title */}
-                  <p className="mb-4 font-size-sm font-weight-bold">
-                    <a className="text-body" href="product.html">
-                      Sweatshirt with Pocket
-                    </a>{" "}
-                    <br />
-                    <span className="text-muted">$39.00</span>
-                  </p>
-                  {/* Text */}
-                  <div className="font-size-sm text-muted">
-                    Size: L <br />
-                    Color: Pink
-                  </div>
-                </div>
-              </div>
-            </li>
+              </Link>
+            ))}
           </ul>
         </div>
       </div>
       {/* Total */}
-      <div className="card card-lg mb-5 border">
+      <div className="card card-lg mb-5 bdataRender">
         <div className="card-body">
           {/* Heading */}
           <h6 className="mb-7">Order Total</h6>
@@ -145,7 +106,9 @@ export default function OrderDetail() {
           <ul className="list-group list-group-sm list-group-flush-y list-group-flush-x">
             <li className="list-group-item d-flex">
               <span>Subtotal</span>
-              <span className="ml-auto">$128.00</span>
+              <span className="ml-auto">
+                {dataRender.amount && numberWithCommas(dataRender.amount)}
+              </span>
             </li>
             <li className="list-group-item d-flex">
               <span>Tax</span>
@@ -153,17 +116,19 @@ export default function OrderDetail() {
             </li>
             <li className="list-group-item d-flex">
               <span>Shipping</span>
-              <span className="ml-auto">$8.00</span>
+              <span className="ml-auto">$0.00</span>
             </li>
             <li className="list-group-item d-flex font-size-lg font-weight-bold">
               <span>Total</span>
-              <span className="ml-auto">$136.00</span>
+              <span className="ml-auto">
+                {dataRender.amount && numberWithCommas(dataRender.amount)}
+              </span>
             </li>
           </ul>
         </div>
       </div>
       {/* Details */}
-      <div className="card card-lg border">
+      <div className="card card-lg bdataRender">
         <div className="card-body">
           {/* Heading */}
           <h6 className="mb-7">Billing &amp; Shipping Details</h6>
@@ -171,24 +136,12 @@ export default function OrderDetail() {
           <div className="row">
             <div className="col-12 col-md-4">
               {/* Heading */}
-              <p className="mb-4 font-weight-bold">Billing Address:</p>
-              <p className="mb-7 mb-md-0 text-gray-500">
-                Daniel Robinson, <br />
-                3997 Raccoon Run, <br />
-                Kingston, 45644, <br />
-                United States, <br />
-                6146389574
-              </p>
-            </div>
-            <div className="col-12 col-md-4">
-              {/* Heading */}
               <p className="mb-4 font-weight-bold">Shipping Address:</p>
               <p className="mb-7 mb-md-0 text-gray-500">
-                Daniel Robinson, <br />
-                3997 Raccoon Run, <br />
-                Kingston, 45644, <br />
-                United States, <br />
-                6146389574
+                {dataRender.city} <br />
+                {dataRender.phone} <br />
+                {dataRender.firstName} {dataRender.lastName} <br />
+                {dataRender.address1} <br />
               </p>
             </div>
             <div className="col-12 col-md-4">
@@ -200,7 +153,7 @@ export default function OrderDetail() {
               </p>
               {/* Heading */}
               <p className="mb-4 font-weight-bold">Payment Method:</p>
-              <p className="mb-0 text-gray-500">Debit Mastercard</p>
+              <p className="mb-0 text-gray-500">{dataRender.paymentMethod}</p>
             </div>
           </div>
         </div>

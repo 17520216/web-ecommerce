@@ -145,7 +145,6 @@ export default function Products() {
     return ret;
   }
   let temp = reverseArr(review.dataReview);
-  console.log("temp", temp);
 
   if (state.loading) {
     return <Loading />;

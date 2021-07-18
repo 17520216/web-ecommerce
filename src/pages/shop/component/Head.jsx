@@ -22,7 +22,6 @@ export default function Head() {
     let value = e.target.value;
     let queryObj = convertQueryToObject();
     queryObj.sort = value;
-    console.log("object", queryObj);
     let queryUrl = convertObjectToQuery(queryObj);
     history.push(`${path}?${queryUrl}`);
   }

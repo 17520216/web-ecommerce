@@ -6,6 +6,7 @@ import {
   REGISTER_ERROR,
   REGISTER,
   UPDATE,
+  ORDER,
 } from "../type";
 
 let initialValue = {
@@ -18,6 +19,7 @@ let initialValue = {
   openModal: false,
   registerSuccess: "",
   updateSuccess: "",
+  order: JSON.parse(localStorage.getItem("order")) || {},
 };
 
 export default function user(state = initialValue, action) {
@@ -64,11 +66,16 @@ export default function user(state = initialValue, action) {
           "Congratulations register successful!!! Please login again!",
       };
     case UPDATE:
-      console.log("action.payload", action.payload);
       return {
         ...state,
         dataUser: action.payload,
         loading: false,
+      };
+    case ORDER:
+      localStorage.setItem("order", JSON.stringify(action.payload));
+      return {
+        ...state,
+        order: action.payload,
       };
     default:
       return state;

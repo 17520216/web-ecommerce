@@ -1,7 +1,7 @@
 import { NavLink, useRouteMatch } from "react-router-dom";
 import { logout } from "../../../redux/action/user";
 import { useDispatch } from "react-redux";
-
+import { clearCart } from "../../../redux/action/cart";
 export function getUrl() {
   let link = window.location.href.split("/");
   return link[link.length - 1];
@@ -53,7 +53,10 @@ export default function TabTitle() {
           <NavLink
             className="list-group-item list-group-item-action dropright-toggle"
             to={`/auth`}
-            onClick={() => dispatch(logout())}
+            onClick={() => {
+              dispatch(logout());
+              dispatch(clearCart());
+            }}
           >
             Logout
           </NavLink>

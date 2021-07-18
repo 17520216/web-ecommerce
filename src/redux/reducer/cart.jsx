@@ -1,4 +1,10 @@
-import { GET_CART, REMOVE_CART, INCREASE_CART, DECREASE_CART } from "../type";
+import {
+  GET_CART,
+  REMOVE_CART,
+  INCREASE_CART,
+  DECREASE_CART,
+  CLEAR_CART,
+} from "../type";
 const listCart = JSON.parse(localStorage.getItem("cart")) || [];
 const num = listCart.length;
 const amount = JSON.parse(localStorage.getItem("amount")) || 0;
@@ -84,7 +90,21 @@ export default function cart(state = initialValue, action) {
         num: num - 1,
       };
     }
+    case CLEAR_CART: {
+      let { listCart, amount, num } = state;
+      listCart = [];
+      amount = 0;
+      num = 0;
+      localStorage.removeItem("amount");
+      localStorage.removeItem("cart");
 
+      return {
+        ...state,
+        listCart,
+        num,
+        amount,
+      };
+    }
     default:
       return state;
   }

@@ -1,4 +1,10 @@
-import { GET_CART, REMOVE_CART, INCREASE_CART, DECREASE_CART } from "../type";
+import {
+  GET_CART,
+  REMOVE_CART,
+  INCREASE_CART,
+  DECREASE_CART,
+  CLEAR_CART,
+} from "../type";
 export function addCart(cart) {
   return {
     type: GET_CART,
@@ -23,5 +29,11 @@ export function decrease(id) {
   return {
     type: DECREASE_CART,
     payload: id,
+  };
+}
+
+export function clearCart() {
+  return {
+    type: CLEAR_CART,
   };
 }

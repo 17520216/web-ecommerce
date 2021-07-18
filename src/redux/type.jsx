@@ -24,3 +24,5 @@ export const FETCH_CATEGORY = "FETCH_CATEGORY";
 export const FETCH_WISH_LIST = "FETCH_WISH_LIST";
 export const GET_WISH_LIST = "GET_WISH_LIST";
 export const WISHLIST = "WISHLIST";
+export const CLEAR_CART = "CLEAR_CART";
+export const ORDER = "ORDER";

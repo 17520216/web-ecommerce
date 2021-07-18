@@ -1,12 +1,17 @@
 import OrderCart from "./OrderCart";
 import Payment from "./Payment";
 import Title from "./Title";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useFormValidate from "../../core/ReactHook/useFormValidate";
 import Below from "./Below";
-
+import cartApi from "../../api/cartApi";
+import { Redirect, useHistory } from "react-router";
+import { clearCart } from "../../redux/action/cart";
 export default function CheckOut() {
+  let $ = window.$;
+  let history = useHistory();
   const { listCart, num } = useSelector((state) => state.cart);
+  let dispatch = useDispatch();
   const { form, inputChange, error, setForm, onSubmit } = useFormValidate(
     {
       firstName: "",
@@ -88,11 +93,11 @@ export default function CheckOut() {
       },
     }
   );
-  function handleSubmit(e) {
-    console.log("form.payment", form.payment);
+  let time = $.date("m-d-Y h:i:s");
+
+  async function handleSubmit(e) {
     e.preventDefault();
     let exclude = {};
-    console.log("ship", form.shipping_different);
     if (!form.shipping_different) {
       exclude = {
         zip_different: 1,
@@ -110,7 +115,11 @@ export default function CheckOut() {
     }
     let err = onSubmit({ exclude });
     if (Object.keys(err).length === 0) {
-      alert("Success");
+      let res = await cartApi.order({ ...form, day: time });
+      if (res.data) {
+        dispatch(clearCart());
+        history.push(`/order-complete/${res.data._id}`);
+      }
     }
   }
 

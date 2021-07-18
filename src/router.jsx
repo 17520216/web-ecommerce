@@ -23,6 +23,7 @@ import ShippingCart from "./pages/shipping-cart";
 
 import { CartItem } from "./components/ModalCart";
 import WishList from "./pages/account/components/WishList";
+import OrderCompleted from "./pages/order-complete/OrderComplete";
 
 const routers = [
   {
@@ -85,7 +86,7 @@ const routers = [
             exact: true,
           },
           {
-            path: "orders/detail",
+            path: "orders/:slug",
             component: OrderDetail,
           },
           {
@@ -114,6 +115,10 @@ const routers = [
       {
         path: "/shop/:slug",
         component: Products,
+      },
+      {
+        path: "/order-complete",
+        component: OrderCompleted,
       },
       {
         exact: true,

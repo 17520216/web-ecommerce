@@ -7,6 +7,10 @@ import {
   FETCH_CATEGORY,
   FETCH_WISH_LIST,
   WISHLIST,
+  GET_CART,
+  REMOVE_CART,
+  INCREASE_CART,
+  DECREASE_CART,
 } from "../type";
 import {
   fetchLogin,
@@ -17,6 +21,7 @@ import {
   fetchWishList,
   getWishList,
 } from "./userSaga";
+import { cartUpdateToBE } from "./cartSaga";
 
 export default function* mySaga() {
   yield takeLatest(FETCH_CATEGORY, fetchCategory);
@@ -26,4 +31,8 @@ export default function* mySaga() {
   yield takeLatest(FETCH_PRODUCT, fetchProduct);
   yield takeLatest(FETCH_WISH_LIST, fetchWishList);
   yield takeLatest(WISHLIST, getWishList);
+  yield takeLatest(
+    [GET_CART, REMOVE_CART, INCREASE_CART, DECREASE_CART],
+    cartUpdateToBE
+  );
 }
