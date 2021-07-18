@@ -4,6 +4,7 @@ import {
   LOADING_PRO,
   GET_CATEGORY,
   FETCH_CATEGORY,
+  PRODUCT_DETAIL,
 } from "../type";
 export function fetchProduct(strUrl) {
   return {
@@ -33,5 +34,11 @@ export function fetchCategory(res) {
 export function actionLoading() {
   return {
     type: LOADING_PRO,
+  };
+}
+export function viewProduct(product) {
+  return {
+    type: PRODUCT_DETAIL,
+    payload: product,
   };
 }

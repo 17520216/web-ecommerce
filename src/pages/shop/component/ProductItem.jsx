@@ -4,6 +4,7 @@ import { fetchWishList } from "../../../redux/action/user";
 import { Skeleton } from "@material-ui/lab";
 import { useDispatch, useSelector } from "react-redux";
 import { numberWithCommas } from "../../../utils/format";
+import { viewProduct } from "../../../redux/action/product";
 
 export default function ProductItem(props) {
   let { loading } = useSelector((state) => state.product);
@@ -18,6 +19,10 @@ export default function ProductItem(props) {
   }
   const addWishList = () => {
     dispatch(fetchWishList({ ...props }));
+  };
+
+  const handleViewCart = () => {
+    dispatch(viewProduct({ ...props }));
   };
 
   return (
@@ -79,6 +84,7 @@ export default function ProductItem(props) {
                 className="btn btn-xs btn-circle btn-white-primary"
                 data-toggle="modal"
                 data-target="#modalProduct"
+                onClick={handleViewCart}
               >
                 <i className="fe fe-eye" />
               </button>

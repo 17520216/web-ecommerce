@@ -1,10 +1,17 @@
-import { GET_WISH_LIST, GET_PRODUCT, LOADING_PRO, GET_CATEGORY } from "../type";
+import {
+  GET_WISH_LIST,
+  GET_PRODUCT,
+  LOADING_PRO,
+  GET_CATEGORY,
+  PRODUCT_DETAIL,
+} from "../type";
 let initialValue = {
   product: JSON.parse(localStorage.getItem("localProduct")) || [],
   paging: "",
   loading: true,
   categories: JSON.parse(localStorage.getItem("categories")) || [],
   wishlist: [],
+  productDetail: {},
 };
 export default function product(state = initialValue, action) {
   switch (action.type) {
@@ -29,6 +36,11 @@ export default function product(state = initialValue, action) {
       return {
         ...state,
         wishlist: action.payload,
+      };
+    case PRODUCT_DETAIL:
+      return {
+        ...state,
+        productDetail: action.payload,
       };
 
     default:

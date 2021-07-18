@@ -26,3 +26,4 @@ export const GET_WISH_LIST = "GET_WISH_LIST";
 export const WISHLIST = "WISHLIST";
 export const CLEAR_CART = "CLEAR_CART";
 export const ORDER = "ORDER";
+export const PRODUCT_DETAIL = "PRODUCT_DETAIL";
