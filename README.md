@@ -1,5 +1,11 @@
 # Getting Started with Create React App
 
+--- Hướng dẫn cài đặt:
+=> Giải nén thực mục : yarn install or npm install -- install node_modules
+=> yarn start or npm start --
+
+`Don't care text below`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
