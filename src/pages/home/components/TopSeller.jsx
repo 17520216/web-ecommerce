@@ -10,13 +10,13 @@ export default function TopSeller() {
     dispatch(actionLoading());
 
     let res = await fetch(
-      `http://cfd-reactjs.herokuapp.com/product?sort=real_price.-1&categories=1789&page=3`
+      `https://cfd-reactjs.herokuapp.com/product?sort=real_price.-1&categories=1789&page=3`
     ).then((res) => res.json());
     let res1 = await fetch(
-      `http://cfd-reactjs.herokuapp.com/product?categories=17166&sort=real_price.-1`
+      `https://cfd-reactjs.herokuapp.com/product?categories=17166&sort=real_price.-1`
     ).then((res) => res.json());
     let res2 = await fetch(
-      ` http://cfd-reactjs.herokuapp.com/product?categories=8594&sort=real_price.-1`
+      ` https://cfd-reactjs.herokuapp.com/product?categories=8594&sort=real_price.-1`
     ).then((res) => res.json());
 
     if (res.data) {
