@@ -63,6 +63,32 @@
       "like": 4,
       "dislike": 1,
       "id": 5
+    },
+    {
+      "active": false,
+      "name": "Nguyen",
+      "email": "nguyenna@gmail.com",
+      "title": "Review Canon",
+      "content": "This is a good choice",
+      "slug": "may-anh-canon-eos-6d-mark-ii-lens-canon-24-105mm-f4l-is-ii-usm-hang-chinh-hang-p711323",
+      "createAt": "07-19-2021 01:11:39",
+      "rating": "5",
+      "like": 4,
+      "dislike": 1,
+      "id": 6
+    },
+    {
+      "active": false,
+      "name": "Mr Bin",
+      "email": "bin@gmial.com",
+      "title": "Review MOTO",
+      "content": "Really Cool!!!",
+      "slug": "xe-may-yamaha-r3-p7801927",
+      "createAt": "07-19-2021 01:17:12",
+      "rating": "5",
+      "like": 3,
+      "dislike": 0,
+      "id": 7
     }
   ]
 }

@@ -685,9 +685,9 @@ export default function Header() {
       <nav className="navbar navbar-expand-lg navbar-light bg-white">
         <div className="container">
           {/* Brand */}
-          <a className="navbar-brand" href="./overview.html">
+          <Link className="navbar-brand" to="/">
             CFD*SHOP
-          </a>
+          </Link>
           {/* Toggler */}
           <button
             className="navbar-toggler"
@@ -789,9 +789,9 @@ export default function Header() {
                 </div>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="docs/getting-started.html">
-                  Docs
-                </a>
+                <Link className="nav-link" to="/store">
+                  Store
+                </Link>
               </li>
             </ul>
             {/* Nav */}
@@ -813,9 +813,9 @@ export default function Header() {
                 )}
               </li>
               <li className="nav-item ml-lg-n4">
-                <a className="nav-link" href="./account-wishlist.html">
+                <Link className="nav-link" to="account/wishlist">
                   <i className="fe fe-heart" />
-                </a>
+                </Link>
               </li>
               <li className="nav-item ml-lg-n4">
                 <a

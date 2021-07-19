@@ -43,6 +43,12 @@ export default function product(state = initialValue, action) {
         productDetail: action.payload,
       };
 
+    case "loadingHome":
+      return {
+        ...state,
+        loading: false,
+      };
+
     default:
       return state;
   }

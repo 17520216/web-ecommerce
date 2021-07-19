@@ -25,7 +25,7 @@ export default function OrderCompleted() {
               )}
             </p>
             {/* Button */}
-            <Link className="btn btn-dark" to={`/account/order/${_id}`}>
+            <Link className="btn btn-dark" to={`/account/orders`}>
               {t("View My Orders")}
             </Link>
           </div>
