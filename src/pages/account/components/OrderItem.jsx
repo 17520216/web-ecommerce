@@ -14,7 +14,6 @@ export default function OrderItem({ order }) {
   };
 
   let dataRender = render(order?.listCart);
-  console.log("order", order);
   return (
     <div className="card card-lg mb-5 border">
       <div className="card-body pb-0">

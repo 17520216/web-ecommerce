@@ -10,8 +10,8 @@ const productApi = {
     return Api.get(`product?slug=${slug}`);
   },
 
-  searchProduct: (slug) => {
-    return Api.get(`product?title=${slug}`);
+  searchProduct: (slug = "") => {
+    return Api.get(`product?search=${slug}`);
   },
 };
 export default productApi;

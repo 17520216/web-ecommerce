@@ -1,4 +1,5 @@
 import useCountDown from "../../../core/ReactHook/useCountDown";
+import { Link } from "react-router-dom";
 export default function CountDown() {
   let { day, hours, minute, seconds } = useCountDown(
     (1 * 24 + 5) * 60 * 60 + 1800
@@ -6,13 +7,13 @@ export default function CountDown() {
   return (
     <section
       className="py-13 bg-cover"
-      style={{ backgroundImage: "url(/img/covers/cover-4.jpg)" }}
+      style={{ backgroundImage: "url(/img/img11.jpeg)" }}
     >
       <div className="container">
         <div className="row justify-content-end">
           <div className="col-12 col-md-8 col-lg-6">
             {/* Heading */}
-            <h3 className="mb-7">
+            <h3 className="mb-7" style={{ color: "white" }}>
               Get -50% from <br />
               Summer Collection
             </h3>
@@ -29,7 +30,9 @@ export default function CountDown() {
                 >
                   {day.toString().padStart(2, 0)}
                 </div>
-                <div className="heading-xxs text-muted">Day</div>
+                <div className="heading-xxs " style={{ color: "white" }}>
+                  Day
+                </div>
               </div>
               <div className="px-1 px-md-4">
                 <div className="font-size-h2 font-weight-bolder text-primary">
@@ -43,7 +46,9 @@ export default function CountDown() {
                 >
                   {hours.toString().padStart(2, 0)}
                 </div>
-                <div className="heading-xxs text-muted">Hours</div>
+                <div className="heading-xxs " style={{ color: "white" }}>
+                  Hours
+                </div>
               </div>
               <div className="px-1 px-md-4">
                 <div className="font-size-h2 font-weight-bolder text-primary">
@@ -57,7 +62,9 @@ export default function CountDown() {
                 >
                   {minute.toString().padStart(2, 0)}
                 </div>
-                <div className="heading-xxs text-muted">Minutes</div>
+                <div className="heading-xxs " style={{ color: "white" }}>
+                  Minutes
+                </div>
               </div>
               <div className="px-1 px-md-4">
                 <div className="font-size-h2 font-weight-bolder text-primary">
@@ -71,13 +78,15 @@ export default function CountDown() {
                 >
                   {seconds.toString().padStart(2, 0)}
                 </div>
-                <div className="heading-xxs text-muted">Seconds</div>
+                <div className="heading-xxs " style={{ color: "white" }}>
+                  Seconds
+                </div>
               </div>
             </div>
             {/* Button */}
-            <a className="btn btn-dark" href="shop.html">
+            <Link className="btn btn-dark" to="/shop">
               Shop Now <i className="fe fe-arrow-right ml-2" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

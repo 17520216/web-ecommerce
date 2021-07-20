@@ -12,6 +12,7 @@ let initialValue = {
   categories: JSON.parse(localStorage.getItem("categories")) || [],
   wishlist: [],
   productDetail: {},
+  dataSearch: {},
 };
 export default function product(state = initialValue, action) {
   switch (action.type) {
@@ -47,6 +48,7 @@ export default function product(state = initialValue, action) {
       return {
         ...state,
         loading: false,
+        dataSearch: action.payload,
       };
 
     default:

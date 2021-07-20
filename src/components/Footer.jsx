@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer
@@ -6,31 +7,6 @@ export default function Footer() {
     >
       <div className="py-12 border-bottom border-gray-700">
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-12 col-md-10 col-lg-8 col-xl-6">
-              {/* Heading */}
-              <h5 className="mb-7 text-center text-white">
-                Want style Ideas and Treats?
-              </h5>
-              {/* Form */}
-              <form className="mb-11">
-                <div className="form-row align-items-start">
-                  <div className="col">
-                    <input
-                      type="email"
-                      className="form-control form-control-gray-700 form-control-lg"
-                      placeholder="Enter Email *"
-                    />
-                  </div>
-                  <div className="col-auto">
-                    <button type="submit" className="btn btn-gray-500 btn-lg">
-                      Subscribe
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
           <div className="row">
             <div className="col-12 col-md-3">
               {/* Heading */}
@@ -70,14 +46,14 @@ export default function Footer() {
               {/* Links */}
               <ul className="list-unstyled mb-7 mb-sm-0">
                 <li>
-                  <a className="text-gray-300" href="./contact-us.html">
+                  <Link className="text-gray-300" to="/contact">
                     Contact Us
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-300" href="./faq.html">
+                  <Link className="text-gray-300" to="/faq">
                     FAQs
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
@@ -88,14 +64,6 @@ export default function Footer() {
                     Size Guide
                   </a>
                 </li>
-                <li>
-                  <a
-                    className="text-gray-300"
-                    href="./shipping-and-returns.html"
-                  >
-                    Shipping &amp; Returns
-                  </a>
-                </li>
               </ul>
             </div>
             <div className="col-6 col-sm">
@@ -104,24 +72,28 @@ export default function Footer() {
               {/* Links */}
               <ul className="list-unstyled mb-7 mb-sm-0">
                 <li>
-                  <a className="text-gray-300" href="./shop.html">
-                    Men's Shopping
-                  </a>
+                  <Link
+                    className="text-gray-300"
+                    to="/shop?categories=1789&sort=real_price.-1"
+                  >
+                    SmartPhone Shopping
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-300" href="./shop.html">
-                    Women's Shopping
-                  </a>
+                  <Link
+                    className="text-gray-300"
+                    to="/shop?categories=8594&sort=real_price.-1"
+                  >
+                    Moto's Shopping
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-300" href="./shop.html">
-                    Kids' Shopping
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-300" href="./shop.html">
-                    Discounts
-                  </a>
+                  <Link
+                    className="text-gray-300"
+                    to="/shop?categories=1801&sort=real_price.-1"
+                  >
+                    Camera's Shopping
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -131,24 +103,24 @@ export default function Footer() {
               {/* Links */}
               <ul className="list-unstyled mb-0">
                 <li>
-                  <a className="text-gray-300" href="./about.html">
+                  <Link to="/about" className="text-gray-300">
                     Our Story
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-300" href="#!">
+                  <Link to="/about" className="text-gray-300">
                     Careers
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-300" href="#!">
+                  <Link to="/about" className="text-gray-300">
                     Terms &amp; Conditions
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-300" href="#!">
+                  <Link to="/about" className="text-gray-300">
                     Privacy &amp; Cookie policy
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

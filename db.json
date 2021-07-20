@@ -89,6 +89,19 @@
       "like": 3,
       "dislike": 0,
       "id": 7
+    },
+    {
+      "active": false,
+      "name": "Nguyen An",
+      "email": "nguyenan@gmail.com",
+      "title": "None",
+      "content": "None",
+      "slug": "dien-thoai-iphone-xs-max-64gb-hang-nhap-khau-p14917752",
+      "createAt": "07-19-2021 09:24:59",
+      "rating": 1,
+      "like": 4,
+      "dislike": 2,
+      "id": 8
     }
   ]
 }

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Slider() {
   return (
     <section>
@@ -8,7 +10,7 @@ export default function Slider() {
         {/* Item */}
         <div
           className="col-12 col-md-6 col-lg-4 d-flex flex-column bg-cover"
-          style={{ backgroundImage: "url(/img/covers/women.jpg)" }}
+          style={{ backgroundImage: "url(/img/img6.jpeg)" }}
         >
           <div
             className="card bg-dark-5 bg-hover text-white text-center"
@@ -16,20 +18,23 @@ export default function Slider() {
           >
             <div className="card-body mt-auto mb-n11 py-8">
               {/* Heading */}
-              <h1 className="mb-0 font-weight-bolder">Women</h1>
+              <h1 className="mb-0 font-weight-bolder">SmartPhone</h1>
             </div>
             <div className="card-body mt-auto py-8">
               {/* Button */}
-              <a className="btn btn-white stretched-link" href="shop.html">
-                Shop Women <i className="fe fe-arrow-right ml-2" />
-              </a>
+              <Link
+                className="btn btn-white stretched-link"
+                to="/shop?categories=1789&sort=real_price.-1"
+              >
+                Shop SmartPhone <i className="fe fe-arrow-right ml-2" />
+              </Link>
             </div>
           </div>
         </div>
         {/* Card */}
         <div
           className="col-12 col-md-6 col-lg-4 d-flex flex-column bg-cover"
-          style={{ backgroundImage: "url(/img/covers/men.jpg)" }}
+          style={{ backgroundImage: "url(/img/img2.jpeg)" }}
         >
           <div
             className="card bg-dark-5 bg-hover text-white text-center"
@@ -37,20 +42,23 @@ export default function Slider() {
           >
             <div className="card-body mt-auto mb-n11 py-8">
               {/* Heading */}
-              <h1 className="mb-0 font-weight-bolder">Men</h1>
+              <h1 className="mb-0 font-weight-bolder">Moto</h1>
             </div>
             <div className="card-body mt-auto py-8">
               {/* Button */}
-              <a className="btn btn-white stretched-link" href="shop.html">
-                Shop Men <i className="fe fe-arrow-right ml-2" />
-              </a>
+              <Link
+                className="btn btn-white stretched-link"
+                to="/shop?categories=8594&sort=real_price.-1"
+              >
+                Shop Moto <i className="fe fe-arrow-right ml-2" />
+              </Link>
             </div>
           </div>
         </div>
         {/* Card */}
         <div
           className="col-12 col-md-6 col-lg-4 d-flex flex-column bg-cover"
-          style={{ backgroundImage: "url(/img/covers/kid.jpg)" }}
+          style={{ backgroundImage: "url(/img/img3.jpeg)" }}
         >
           <div
             className="card bg-dark-5 bg-hover text-white text-center"
@@ -58,13 +66,16 @@ export default function Slider() {
           >
             <div className="card-body mt-auto mb-n11 py-8">
               {/* Heading */}
-              <h1 className="mb-0 font-weight-bolder">Kids</h1>
+              <h1 className="mb-0 font-weight-bolder">Camera</h1>
             </div>
             <div className="card-body mt-auto py-8">
               {/* Button */}
-              <a className="btn btn-white stretched-link" href="shop.html">
-                Shop Kids <i className="fe fe-arrow-right ml-2" />
-              </a>
+              <Link
+                className="btn btn-white stretched-link"
+                to="/shop?categories=1801&sort=real_price.-1"
+              >
+                Shop Camera <i className="fe fe-arrow-right ml-2" />
+              </Link>
             </div>
           </div>
         </div>

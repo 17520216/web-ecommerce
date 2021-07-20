@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export default function BestPick() {
   return (
     <section className="pt-12">
@@ -22,7 +23,7 @@ export default function BestPick() {
               className="card mb-7 text-white"
               style={{
                 minHeight: "400px",
-                backgroundImage: "url(/img/products/product-1.jpg)",
+                backgroundImage: "url(/img/img7.jpeg)",
               }}
             >
               {/* Background */}
@@ -30,21 +31,21 @@ export default function BestPick() {
                 <div
                   className="card-bg-img bg-cover"
                   style={{
-                    backgroundImage: "url(/img/products/product-1.jpg)",
+                    backgroundImage: "url(/img/products/img7.jpeg)",
                   }}
                 />
               </div>
               {/* Body */}
               <div className="card-body my-auto text-center">
                 {/* Heading */}
-                <h4 className="mb-0">Bags Collection</h4>
+                <h4 className="mb-0">Iphone Collection</h4>
                 {/* Link */}
-                <a
+                <Link
                   className="btn btn-link stretched-link text-reset"
-                  href="shop.html"
+                  to="/shop?categories=1801&sort=real_price.-1"
                 >
                   Shop Now <i className="fe fe-arrow-right ml-2" />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -56,7 +57,7 @@ export default function BestPick() {
                 <div
                   className="card-bg-img bg-cover"
                   style={{
-                    backgroundImage: "url(/img/products/product-2.jpg)",
+                    backgroundImage: "url(/img/img9.jpg)",
                   }}
                 />
               </div>
@@ -68,14 +69,14 @@ export default function BestPick() {
                   <span className="font-size-h4 font-weight-bold">30%</span>
                 </div>
                 {/* Heading */}
-                <h4 className="mb-0">Printed men’s Shirts</h4>
+                <h4 className="mb-0">Let's Go</h4>
                 {/* Link */}
-                <a
+                <Link
                   className="btn btn-link stretched-link px-0 text-reset"
-                  href="shop.html"
+                  to="/shop?categories=1801&sort=real_price.-1"
                 >
                   Shop Now <i className="fe fe-arrow-right ml-2" />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -90,21 +91,21 @@ export default function BestPick() {
                 <div
                   className="card-bg-img bg-cover"
                   style={{
-                    backgroundImage: "url(/img/products/product-3.jpg)",
+                    backgroundImage: "url(/img/img9.webp)",
                   }}
                 />
               </div>
               {/* Body */}
               <div className="card-body my-auto px-md-10 text-center text-md-left">
                 {/* Heading */}
-                <h4 className="mb-0">Basic women’s Dresses</h4>
+                <h4 className="mb-0">IPhone</h4>
                 {/* Link */}
-                <a
+                <Link
                   className="btn btn-link stretched-link px-0 text-reset"
-                  href="shop.html"
+                  to="/shop?categories=17166&sort=real_price.-1"
                 >
                   Shop Now <i className="fe fe-arrow-right ml-2" />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -116,21 +117,21 @@ export default function BestPick() {
                 <div
                   className="card-bg-img bg-cover"
                   style={{
-                    backgroundImage: "url(/img/products/product-4.jpg)",
+                    backgroundImage: "url(/img/img10.jpeg)",
                   }}
                 />
               </div>
               {/* Body */}
               <div className="card-body my-auto text-center">
                 {/* Heading */}
-                <h4 className="mb-0">Sweatshirts</h4>
+                <h4 className="mb-0">NoW</h4>
                 {/* Link */}
-                <a
+                <Link
                   className="btn btn-link stretched-link text-reset"
-                  href="shop.html"
+                  to="/shop?categories=1801&sort=real_price.-1"
                 >
                   Shop Now <i className="fe fe-arrow-right ml-2" />
-                </a>
+                </Link>
               </div>
             </div>
           </div>

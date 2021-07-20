@@ -29,7 +29,6 @@ export default function cart(state = initialValue, action) {
         listCart.push(action.payload);
         amount = amount + action.payload.real_price * action.payload.numCart;
       }
-      console.log(typeof action.payload.num);
       localStorage.setItem("cart", JSON.stringify(listCart));
       localStorage.setItem("amount", JSON.stringify(amount));
       return {
