@@ -65,6 +65,10 @@ export function ModalSearch() {
     }
   };
 
+  const clickSearch = () => {
+    setProduct(dataMap);
+  };
+
   function handleSearch(e) {
     e.preventDefault();
     let value = e.target.value;
@@ -142,7 +146,7 @@ export function ModalSearch() {
                 />
                 <div className="input-group-append">
                   <button className="btn btn-outline-border">
-                    <i onClick={handleSearch} className="fe fe-search" />
+                    <i onClick={clickSearch} className="fe fe-search" />
                   </button>
                 </div>
               </div>
