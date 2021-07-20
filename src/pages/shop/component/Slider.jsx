@@ -92,6 +92,7 @@
 import React from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 let $ = window.$;
 
@@ -99,7 +100,7 @@ export default function Slider() {
   let thisRef = useRef();
   useEffect(() => {
     $(thisRef.current).flickity({
-      dots: true,
+      pageDots: true,
     });
   }, []);
   return (
@@ -112,7 +113,7 @@ export default function Slider() {
       <div className="w-100">
         <div
           className="card bg-h-100 bg-left"
-          style={{ backgroundImage: "url(/img/covers/cover-24.jpg)" }}
+          style={{ backgroundImage: "url(/img/img12.jpeg)" }}
         >
           <div className="row" style={{ minHeight: "400px" }}>
             <div className="col-12 col-md-10 col-lg-8 col-xl-6 align-self-center">
@@ -120,14 +121,17 @@ export default function Slider() {
                 {/* Heading */}
                 <h4>2021 Summer Collection</h4>
                 {/* Button */}
-                <a className="btn btn-link px-0 text-body" href="shop.html">
+                <Link
+                  className="btn btn-link px-0 text-body"
+                  to="/shop?categories=1789&sort=real_price.-1&page=3"
+                >
                   View Collection <i className="fe fe-arrow-right ml-2" />
-                </a>
+                </Link>
               </div>
             </div>
             <div
               className="col-12 col-md-2 col-lg-4 col-xl-6 d-none d-md-block bg-cover"
-              style={{ backgroundImage: "url(/img/covers/cover-16.jpg)" }}
+              style={{ backgroundImage: "url(/img/img13.jpeg)" }}
             />
           </div>
         </div>
@@ -136,7 +140,7 @@ export default function Slider() {
       <div className="w-100">
         <div
           className="card bg-cover"
-          style={{ backgroundImage: "url(/img/covers/cover-29.jpg)" }}
+          style={{ backgroundImage: "url(/img/img14.jpeg)" }}
         >
           <div
             className="row align-items-center"
@@ -152,9 +156,13 @@ export default function Slider() {
                   <strong className="text-primary">Use code 4GF5SD</strong>
                 </p>
                 {/* Button */}
-                <a className="btn btn-outline-dark" href="shop.html">
+                <Link
+                  className="btn btn-outline"
+                  to="/shop?categories=1789&sort=real_price.-1"
+                  style={{ color: "white" }}
+                >
                   Shop Now <i className="fe fe-arrow-right ml-2" />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -164,7 +172,7 @@ export default function Slider() {
       <div className="w-100">
         <div
           className="card bg-cover"
-          style={{ backgroundImage: "url(/img/covers/cover-30.jpg)" }}
+          style={{ backgroundImage: "url(/img/img15.jpeg)" }}
         >
           <div
             className="row align-items-center"
@@ -177,9 +185,12 @@ export default function Slider() {
                 {/* Heading */}
                 <h1 className="display-4 text-uppercase">50% off</h1>
                 {/* Link */}
-                <a className="link-underline text-reset" href="shop.html">
+                <Link
+                  className="link-underline text-reset"
+                  to="/shop?categories=8594&sort=real_price.-1"
+                >
                   Shop Collection
-                </a>
+                </Link>
               </div>
             </div>
           </div>
