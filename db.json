@@ -102,6 +102,19 @@
       "like": 4,
       "dislike": 2,
       "id": 8
+    },
+    {
+      "active": false,
+      "name": "Nguyen An",
+      "email": "nguyenan@gmail.com",
+      "title": "Review Iphone",
+      "content": "this is a good product",
+      "slug": "dien-thoai-samsung-galaxy-note-20-ultra-8gb-256gb-hang-chinh-hang-p58616042",
+      "createAt": "07-21-2021 02:33:13",
+      "rating": "5",
+      "like": 1,
+      "dislike": 1,
+      "id": 9
     }
   ]
 }
